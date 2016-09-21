@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html ng-app="MultimarcasApp" ng-controller="OfertaController">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Offorss</title>
+    <script type="text/javascript">
+    var apiBaseUrl = '@Url.Content(Hermeco.Multimarcas.WebApiConfig.UrlPrefixRelative)';
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row top-navbar">
+            <nav class="navbar navbar-inverse navbar-static-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="index.html"><img src="@Url.Content("~/Content/images/logo.png")" alt="Offcorss"></a>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#offcorss-navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div id="offcorss-navbar" class="navbar-collapse collapse">
+                        <form class="navbar-form navbar-left">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Buscar Referencia...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Buscar</button>
+                                </span>
+                            </div>
+                        </form>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a href="index.html">Ofertas</a></li>
+                            <li><a href="catalogo.html">Catalogo</a></li>
+                            <li><a href="infopedido.html"><span class="glyphicon glyphicon-shopping-cart"></span><div class="circulo"></div></a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Katherine <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#" data-toggle="modal" data-target="#cartera">Mi Cartera</a></li>
+                                    <li><a href="#">Ver Canasta</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="login.html">Salida Segura</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-lg-12">
+                <!-- Page Content -->
+                <div class="portafolio">
+                    <div class="col-xs-12 col-md-4 col-lg-3 portafolio-item" ng-repeat="oferta in ofertas">
+                        <a class="portafolio-link" href="catalogo.html">
+                            <div class="portafolio-hover">
+                                <div class="portafolio-hover-content">
+                                    {{oferta.Nombre}}
+                                </div>
+                            </div>
+                            <img class="img-responsive" data-ng-src="data:image/JPEG;base64,{{oferta.Imagen}}" />
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div id="cartera" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Mi Cartera</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Cupo de Crédito: $ 50.000.000 </p>
+                        <p>Cartera: $10.000.000</p>
+                        <p>Pedidos: $250.000.000</p>
+                        <p>Cupo Disponible: $40.000.000</p>
+                        <p>Estado del Cliente: ACTIVO</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-defaul" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-page">
+            <span class="glyphicon glyphicon-envelope"></span> OFFCORSS es una marca de C.I. Hermeco S.A. PBX. +54(4)3847100 - Fax. +57(4) 262 0803 A.A. 50945 - Medellin, Colombia
+        </div>
+    </div>
+    @Styles.Render("~/Content/css")
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="js/css3-mediaqueries.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+    @Scripts.Render("~/bundles/angularjs")
+</body>
+</html>
