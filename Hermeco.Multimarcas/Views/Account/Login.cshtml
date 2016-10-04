@@ -33,13 +33,19 @@
                         <h4>Por favor, ingrese los datos</h4>
                     </div>
                     <div class="content">
+                        @if (ViewBag.Result == true)
+                        {
+                            <div class="alert alert-danger">
+                                @ViewData["Message"]
+                            </div>
+                        }
                         <input name="UserName" id="UserName" type="text" class="input username" placeholder="Username" />
                         <div class="user-icon"></div>
                         <input name="password" id="password" type="password" class="input password" placeholder="Password" />
                         <div class="pass-icon"></div>
                     </div>
                     <div class="footer">
-                        <input type="submit" class="button btn btn-block" value="Iniciar Sesión"></input>
+                        <input type="submit" class="button btn btn-block" value="Iniciar Sesión"/>
                     </div>
                 </form>
             </div>

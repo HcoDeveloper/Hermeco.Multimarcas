@@ -1,13 +1,25 @@
 ﻿<!DOCTYPE html>
-<html ng-app="MultimarcasApp" ng-controller="OfertaController">
+<html xmlns:ng="http://angularjs.org" ng-app="MultimarcasApp">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Offorss</title>
     <script type="text/javascript">
-    var apiBaseUrl = '@Url.Content(Hermeco.Multimarcas.WebApiConfig.UrlPrefixRelative)';
+        var apiBaseUrl = '@Url.Content(Hermeco.Multimarcas.WebApiConfig.UrlPrefixRelative)';
     </script>
+    <!--[if lte IE 8]>
+       <script>
+         document.createElement('ng-include');
+         document.createElement('ng-pluralize');
+         document.createElement('ng-view');
+
+         // Optionally these for CSS
+         document.createElement('ng:include');
+         document.createElement('ng:pluralize');
+         document.createElement('ng:view');
+       </script>
+     <![endif]-->
 </head>
 <body>
     <div class="container-fluid">
@@ -33,11 +45,10 @@
                             </div>
                         </form>
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="active"><a href="index.html">Ofertas</a></li>
-                            <li><a href="catalogo.html">Catalogo</a></li>
-                            <li><a href="infopedido.html"><span class="glyphicon glyphicon-shopping-cart"></span><div class="circulo"></div></a></li>
+                            <li class="active"><a href="/">Ofertas</a></li>
+                            <li><a href="/Pedido"><span class="glyphicon glyphicon-shopping-cart"></span><div class="circulo"></div></a></li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Katherine <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{infoCliente.NombreCliente}} <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#" data-toggle="modal" data-target="#cartera">Mi Cartera</a></li>
                                     <li><a href="#">Ver Canasta</a></li>
@@ -49,23 +60,8 @@
                 </div>
             </nav>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-lg-12">
-                <!-- Page Content -->
-                <div class="portafolio">
-                    <div class="col-xs-12 col-md-4 col-lg-3 portafolio-item" ng-repeat="oferta in ofertas">
-                        <a class="portafolio-link" href="catalogo.html">
-                            <div class="portafolio-hover">
-                                <div class="portafolio-hover-content">
-                                    {{oferta.Nombre}}
-                                </div>
-                            </div>
-                            <img class="img-responsive" data-ng-src="data:image/JPEG;base64,{{oferta.Imagen}}" />
-                        </a>
-                    </div>
-                    
-                </div>
-            </div>
+        <div ng-view>
+
         </div>
         <div id="cartera" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -75,11 +71,11 @@
                         <h4 class="modal-title">Mi Cartera</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Cupo de Crédito: $ 50.000.000 </p>
-                        <p>Cartera: $10.000.000</p>
-                        <p>Pedidos: $250.000.000</p>
-                        <p>Cupo Disponible: $40.000.000</p>
-                        <p>Estado del Cliente: ACTIVO</p>
+                        <p>Cupo de Crédito: {{infoCliente.CupoCredito}} </p>
+                        <p>Cartera: {{infoCliente.Cartera}}</p>
+                        <p>Pedidos: </p>
+                        <p>Cupo Disponible: {{infoCliente.CupoDisponible}}</p>
+                        <p>Estado del Cliente: {{infoCliente.EstadoCliente}}</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-defaul" data-dismiss="modal">Cerrar</button>
@@ -102,6 +98,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.js"></script>
     @Scripts.Render("~/bundles/angularjs")
 </body>
 </html>

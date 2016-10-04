@@ -15,12 +15,18 @@
 }
 
 body {
-	background: url('../images/bg.jpg');
+	/*background: url('../images/bg.jpg');*/
     font-family: "Helvetica Neue", Arial, sans-serif;
 	font-weight:300;
 	text-align: left;
 	text-decoration: none;
 	height: 500px;
+    background: url('../images/login.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
 }
 #container{
 	border-radius: 5px;
@@ -196,6 +202,10 @@ CONTENT
 	-webkit-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
 	-ms-transition: all 0.5s ease;
+}
+
+.top-navbar .navbar-brand {
+    height: 80px;
 }
 
 /*******************

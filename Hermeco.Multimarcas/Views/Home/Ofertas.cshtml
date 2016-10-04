@@ -1,0 +1,16 @@
+﻿<div class="row" >
+    <div class="col-xs-12 col-sm-12 col-lg-12">
+        <div class="portafolio">
+            <div class="col-xs-12 col-md-4 col-lg-3 portafolio-item" ng-repeat="oferta in ofertas">
+                <a class="portafolio-link" href="#/Catalogo/{{oferta.Id}}">
+                    <div class="portafolio-hover">
+                        <div class="portafolio-hover-content">
+                            {{oferta.Nombre}}
+                        </div>
+                    </div>
+                    <img class="img-responsive center" data-ng-src="data:image/JPEG;base64,{{oferta.Imagen}}" />
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

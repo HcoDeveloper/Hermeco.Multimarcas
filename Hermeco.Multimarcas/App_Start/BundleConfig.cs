@@ -25,12 +25,13 @@ namespace Hermeco.Multimarcas
 
             bundles.Add(new StyleBundle("~/Login/css").Include(
                       "~/Content/css/bootstrap.min.css",
-                      "~/Content/css/loginStyle.css",
-                      "~/Content/css/Style.css"));
+                      "~/Content/css/loginStyle.css"
+                      ));
 
             bundles.Add(new ScriptBundle("~/bundles/angularjs")
                     .IncludeDirectory("~/Scripts/Controllers", "*.js") 
-                    .Include("~/Scripts/Multimarcas.js"));
+                    .Include("~/Scripts/Multimarcas.js")
+                    .Include("~/Scripts/angular-endless-scroll.min.js"));
         }
     }
 }

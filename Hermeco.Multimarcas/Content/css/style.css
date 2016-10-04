@@ -131,6 +131,11 @@ portafolio * {
     opacity: 1;
 }
 
+.portafolio-item img {
+    width:100%;
+    overflow: hidden;
+}
+
 /* Left Panel */
 .left-panel .panel {
     margin-top: 10px;
@@ -218,6 +223,8 @@ portafolio * {
 
 .imagen-producto img {
     max-width: 100%;
+    height:200px;
+    overflow:hidden;
 }
 
 .info-producto {
