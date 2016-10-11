@@ -1,22 +1,12 @@
 ﻿var CatalogoController =  ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
-
     $http.get(apiBaseUrl + '/oferta')
        .then(function (response) {
            $scope.ofertas = response.data;
-       });
-    
+       });    
     $http.get(apiBaseUrl + '/Account')
        .then(function (response) {
            $scope.infoCliente = response.data;
        });
-
-    /*
-    $http.get(apiBaseUrl + '/catalogo/?oferta=' + $routeParams.oferta)
-
-        .then(function (response) {
-            $scope.referencias = response.data;
-        });
-    */
     function load(page) {
         if ($scope.running) return;
         $scope.page = page;
@@ -44,6 +34,17 @@
         load($scope.page);
     });
 
+
+    $scope.AsignAllTallas = function (color) {
+        console.log(color);
+        var elements = document.getElementsByName(color);
+        var total = 0;
+        for (i = 1; i < elements.length; i++) {
+            elements[i].value = elements[0].value;
+            total += Number(elements[0].value);
+        }
+        elements[elements.length-1].value = total;
+    }
 
     //$scope.$on('endlessScroll:previous', function () {
     //    $scope.page = $scope.page - 1;

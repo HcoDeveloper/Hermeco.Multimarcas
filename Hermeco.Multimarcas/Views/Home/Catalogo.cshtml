@@ -138,9 +138,9 @@
                                                     <td></td>
                                                     <td></td>
                                                     <td ng-repeat-start="color in refdetail.Colores">
-                                                        <input type="text" size="3" maxlength="3" />
+                                                        <input type="text" size="3" maxlength="3" name="{{color}}" />
                                                     </td>
-                                                    <td ng-repeat-end=""><a href="#" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span></a> </td>
+                                                    <td ng-repeat-end=""><button class="btn btn-default" target="_self" ng-click="AsignAllTallas(color)"><span class="glyphicon glyphicon-arrow-down"></span></button> </td>
                                                     <td>Total</td>
                                                 </tr>
                                                 <tr ng-repeat="talla in refdetail.Tallas">
@@ -152,18 +152,36 @@
                                                         <a href="#" class="btn btn-default" onclick="AsignAllColors(this)"><span class="glyphicon glyphicon-arrow-right"></a>
                                                     </td>
                                                     <td ng-repeat-start="color in refdetail.Colores">
-                                                        <input type="hidden" size="3" maxlength="3" name="plu" />
-                                                        <input type="hidden" size="3" maxlength="3" name="talla" />
-                                                        <input type="hidden" size="3" maxlength="3" name="color" />
-                                                        <input type="text" size="3" maxlength="3" name="cantidad" />
+                                                        <input type="hidden" size="3" maxlength="3" name="oferta" value="{{refdetail.IdOferta}}" />
+                                                        <span ng-repeat="plu in refdetail.Plu | filter:{Talla: talla, Color: color}:true">
+                                                            <input type="hidden" size="3" maxlength="3" name="plu" value="{{plu.Codigo}}" />
+                                                        </span>
+                                                        <input type="hidden" size="3" maxlength="3" name="talla" value="{{talla}}" />
+                                                        <input type="hidden" size="3" maxlength="3" name="color" value="{{color}}" />
+                                                        <input type="text" size="3" maxlength="3" name="{{color}}" />
                                                     </td>
-                                                    <td ng-repeat-end="">/ 30</td>
+                                                    <td ng-repeat-end="">
+                                                        /
+                                                        <span ng-repeat="plu in refdetail.Plu | filter:{Talla: talla, Color: color}:true">
+                                                            {{plu.stock}}
+                                                        </span>
+                                                    </td>
                                                     <td>
                                                         <input type="text" size="3" maxlength="3" />
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>Total</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td ng-repeat-start="color in refdetail.Colores">
+                                                        <input type="text" size="3" maxlength="3" name="{{color}}" />
+                                                    </td>
+                                                    <td ng-repeat-end=""></td>
+                                                    <td><input type="text" size="3" maxlength="3" name="totalGeneral" /></td>
+                                                </tr>
                                             </table>
-                                        </div>s
+                                        </div>
                                     </div>
                                 </div>
 
