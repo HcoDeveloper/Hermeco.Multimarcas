@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://10.10.17.106:50000/dir/wsdl?p=sa/0644f8654c0b377dbfabc8288db00fe0" filename="CreaPedido_Sync_Out.wsdl" />
+  </Results>
+</DiscoveryClientResultsFile>

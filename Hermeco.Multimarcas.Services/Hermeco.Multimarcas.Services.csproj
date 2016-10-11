@@ -43,7 +43,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,15 +56,89 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\Cliente.cs" />
+    <Compile Include="BusinessObjects\Imagenes.cs" />
+    <Compile Include="BusinessObjects\Plu.cs" />
+    <Compile Include="BusinessObjects\Referencia.cs" />
+    <Compile Include="ClienteService.cs" />
+    <Compile Include="CustomerService.cs" />
+    <Compile Include="Entities\CartItemEntity.cs" />
     <Compile Include="Entities\ClienteOfertaEntity.cs" />
+    <Compile Include="Entities\ImagenesReferenciaEntity.cs" />
     <Compile Include="Entities\OfertaEntity.cs" />
+    <Compile Include="Entities\ReferenciaOfertasEntity.cs" />
+    <Compile Include="HMChannelFactory.cs" />
+    <Compile Include="HMService.cs" />
+    <Compile Include="Mappings\CartItemMap.cs" />
     <Compile Include="Mappings\ClienteOfertaMap.cs" />
+    <Compile Include="Mappings\ImagenesReferenciaMap.cs" />
     <Compile Include="Mappings\OfertaMap.cs" />
+    <Compile Include="Mappings\ReferenciaOfertasMap.cs" />
+    <Compile Include="PedidoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ReferenciaService.cs" />
+    <Compile Include="Service References\Proxy\Reference.cs" />
+    <Compile Include="Service References\Proxy\Reference1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="SessionManager.cs" />
+    <Compile Include="Utility.cs" />
+    <Compile Include="Web References\wsPedidos\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Proxy\AviableReports.wsdl" />
+    <None Include="Web References\wsPedidos\ConfirmaPed.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\wsPedidos\CreaPedido_Sync_Out.wsdl" />
+    <None Include="Web References\wsPedidos\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Service References\Proxy\configuration.svcinfo" />
+    <Content Include="Service References\Proxy\configuration91.svcinfo" />
+    <Content Include="Service References\Proxy\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://10.10.17.106:50000/dir/wsdl%3fp=sa/0644f8654c0b377dbfabc8288db00fe0">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wsPedidos\</RelPath>
+      <UpdateFromURL>http://10.10.17.106:50000/dir/wsdl%3fp=sa/0644f8654c0b377dbfabc8288db00fe0</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Hermeco_Multimarcas_Services_wsPedidos_CreaPedido_Sync_OutService</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
