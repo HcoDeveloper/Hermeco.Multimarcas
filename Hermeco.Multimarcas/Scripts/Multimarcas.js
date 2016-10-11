@@ -4,17 +4,26 @@ MultimarcasApp.config([
     '$locationProvider', '$routeProvider',
     function ($locationProvider, $routeProvider) {
         $routeProvider
-        .when('/', {
-            templateUrl: '/Home/Ofertas',
+        .when(webBaseUrl, {
+            templateUrl: webBaseUrl + 'Home/Ofertas',
             controller: 'OfertaController'
         })
-        .when('/Catalogo/:oferta', {
-            templateUrl: '/Home/Catalogo',
+        .when(webBaseUrl + 'Catalogo/:oferta', {
+            templateUrl: webBaseUrl + 'Home/Catalogo',
             controller: 'CatalogoController',
             
         })
+        .when(webBaseUrl + 'Pedido', {
+            templateUrl: webBaseUrl + 'Home/Pedido',
+            controller: 'PedidoController',
+
+        })
+        .when(webBaseUrl + 'Logout', {
+            templateUrl: webBaseUrl + 'Account/Logout',
+            controller: 'OfertaController'
+        })
         .otherwise({
-           redirectTo: '/'
+            redirectTo: webBaseUrl
         });
         $locationProvider.html5Mode(true);
     }

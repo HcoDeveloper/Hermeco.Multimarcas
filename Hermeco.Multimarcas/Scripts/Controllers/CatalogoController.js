@@ -1,5 +1,4 @@
-﻿
-var CatalogoController = function ($scope, $http, $routeParams) {
+﻿var CatalogoController =  ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
 
     $http.get(apiBaseUrl + '/oferta')
        .then(function (response) {
@@ -45,10 +44,11 @@ var CatalogoController = function ($scope, $http, $routeParams) {
         load($scope.page);
     });
 
-    $scope.$on('endlessScroll:previous', function () {
-        $scope.page = $scope.page - 1;
-        load($scope.page);
-    });
+
+    //$scope.$on('endlessScroll:previous', function () {
+    //    $scope.page = $scope.page - 1;
+    //    load($scope.page);
+    //});
     load(1);
 
     $scope.loadReferencia = function (oferta, refid) {
@@ -58,6 +58,6 @@ var CatalogoController = function ($scope, $http, $routeParams) {
             });
     }
 
-}
+}]
 
 CatalogoController.$inject = ['$scope', '$http', '$routeParams'];

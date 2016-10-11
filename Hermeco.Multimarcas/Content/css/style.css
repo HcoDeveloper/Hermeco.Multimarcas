@@ -282,6 +282,9 @@ portafolio * {
     max-height: 700px;
 }
 
+.modal-body table {
+    margin: 0 auto;
+}
 
 /* Carousel */
 .carousel-inner > .item > img, 

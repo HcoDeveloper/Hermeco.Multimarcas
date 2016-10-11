@@ -9,14 +9,14 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" href="/Catalogo/{{oferta.Id}}">{{oferta.Nombre}}</a>
+                                        <a data-toggle="collapse" href="@Url.Content("~/")Catalogo/{{oferta.Id}}">{{oferta.Nombre}}</a>
                                     </h4>
                                 </div>
                             </div>
                             <div id="portafolios" class="panel-collapse">
                                 <div class="panel-body">
                                     <ul class="list-group">
-                                        <li class="list-group-item active"><a href="#/Catalogo/{{oferta.Id}}">Todos (100)</a></li>
+                                        <li class="list-group-item active"><a href="@Url.Content("~/")Catalogo/{{oferta.Id}}">Todos (100)</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -28,9 +28,9 @@
                 <!-- Page Content -->
                 <div class="row">
                     <div class="col-xs-12 col-md-4 col-lg-3" endless-scroll="referencia in referencias">
-                        <div class="tarjeta-producto">                          
+                        <div class="tarjeta-producto">
                             <div class="imagen-producto img-responsive">
-                                <img src="https://clientes.hermeco.com/web/LoadImage/LoadImage.ashx?IdImagen={{referencia.Plu[0].Codigo}}&IdTipo=2&Tamano=2" class="img-responsive center-block" />
+                                <img class="img-responsive center" data-ng-src="data:image/JPEG;base64,{{referencia.Imagenes[0].Imagen}}" />
                             </div>
                             <div class="info-producto">
                                 <p>{{referencia.Plu[0].Descripcion}}</p>
@@ -75,29 +75,19 @@
                                         <div id="cProductos" class="carousel slide" data-ride="carousel" data-interval="false">
                                             <div class="carousel-inner" role="listbox">
                                                 <ol class="carousel-indicators">
-                                                    <li data-target="#cProductos" data-slide-to="0" class="active">
-                                                    </li>
-                                                    <li data-target="#cProductos" data-slide-to="1">
-                                                    </li>
-                                                    <li data-target="#cProductos" data-slide-to="2">
+                                                    <li data-target="#cProductos" data-slide-to="{{Imagenes.Orden}}" ng-repeat="Imagenes in refdetail.Imagenes">
                                                     </li>
                                                 </ol>
-                                                <div class="item active">
-                                                    <img src="http://lorempixel.com/400/300" alt="Ref0001">
-                                                </div>
-                                                <div class="item">
-                                                    <img src="http://lorempixel.com/400/300" alt="Ref0001">
-                                                </div>
-                                                <div class="item">
-                                                    <img src="http://lorempixel.com/400/300" alt="Ref0001">
+                                                <div class="item" ng-class="{'active':$first}" ng-repeat="Imagenes in refdetail.Imagenes">
+                                                    <img class="img-responsive center" data-ng-src="data:image/JPEG;base64,{{Imagenes.Imagen}}" style=" display: block; max-height:500px; width: auto; height: auto;" />
                                                 </div>
                                             </div>
                                             <!-- Left and right controls -->
-                                            <a class="left carousel-control" href="#cProductos" role="button" data-slide="prev">
+                                            <a class="left carousel-control" href="#cProductos" role="button" data-slide="prev" target="_self">
                                                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                                                 <span class="sr-only">Anterior</span>
                                             </a>
-                                            <a class="right carousel-control" href="#cProductos" role="button" data-slide="next">
+                                            <a class="right carousel-control" href="#cProductos" role="button" data-slide="next" target="_self">
                                                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                                 <span class="sr-only">Siguiente</span>
                                             </a>
@@ -114,16 +104,16 @@
                                                     <label>Tipo Diseño:</label>{{refdetail.Plu[0].ConcDiseno}}
                                                 </div>
                                                 <div>
-                                                    <label>Colores:</label><span ng-repeat="color in refdetail.Colores" >{{color}}&nbsp;</span>
+                                                    <label>Colores:</label><span ng-repeat="color in refdetail.Colores">{{color}}&nbsp;</span>
                                                 </div>
                                                 <div>
                                                     <label>Tallas:</label><span ng-repeat="talla in refdetail.Tallas">{{talla}}&nbsp;</span>
                                                 </div>
                                                 <div>
-                                                    <label>Precio:</label><span class="precio-referencia">$ {{refdetail.Plu[0].Precio}}</span>
+                                                    <label>Precio:</label><span class="precio-referencia">{{refdetail.Plu[0].Precio | currency}}</span>
                                                 </div>
                                                 <div>
-                                                    <label>Precio Oferta:</label> $ {{refdetail.Plu[0].Precio}}
+                                                    <label>Precio Oferta:</label>{{refdetail.Plu[0].Precio | currency}}
                                                 </div>
                                             </div>
                                         </div>
@@ -138,27 +128,8 @@
                                             <table>
                                                 <tr>
                                                     <td colspan="3"></td>
-                                                    <td colspan="2">
-                                                        <a data-target="#cProductos" data-slide-to="0">
-                                                            <img src="http://lorempixel.com/70/70" alt="Ref0001" />
-                                                        </a>
-                                                        <span class="block">Rojo 18-1660</span>
-                                                    </td>
-                                                    <td colspan="2">
-                                                        <a data-target="#cProductos" data-slide-to="1"> <img src="http://lorempixel.com/70/70" alt="Ref0001" /></a>
-                                                        <span class="block">Azul 19-3921</span>
-                                                    </td>
-                                                    <td colspan="2">
-                                                        <a data-target="#cProductos" data-slide-to="2"> <img src="http://lorempixel.com/70/70" alt="Ref0001" /></a>
-                                                        <span class="block">Verde 13-0650</span>
-                                                    </td>
-                                                    <td colspan="2">
-                                                        <a data-target="#cProductos" data-slide-to="2"> <img src="http://lorempixel.com/70/70" alt="Ref0001" /></a>
-                                                        <span class="block">Verde 13-0650</span>
-                                                    </td>
-                                                    <td colspan="2">
-                                                        <a data-target="#cProductos" data-slide-to="2"> <img src="http://lorempixel.com/70/70" alt="Ref0001" /></a>
-                                                        <span class="block">Verde 13-0650</span>
+                                                    <td colspan="2" ng-repeat="color in refdetail.Colores">
+                                                        <span class="block">{{color}}</span>
                                                     </td>
                                                     <td></td>
                                                 </tr>
@@ -166,254 +137,33 @@
                                                     <td>Talla</td>
                                                     <td></td>
                                                     <td></td>
-                                                    <td>
+                                                    <td ng-repeat-start="color in refdetail.Colores">
                                                         <input type="text" size="3" maxlength="3" />
                                                     </td>
-                                                    <td><a href="#" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span></a> </td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td><a href="#" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span></a> </td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td><a href="#" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span></a> </td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td><a href="#" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span></a> </td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td><a href="#" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span></a> </td>
+                                                    <td ng-repeat-end=""><a href="#" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span></a> </td>
                                                     <td>Total</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>4</td>
+                                                <tr ng-repeat="talla in refdetail.Tallas">
+                                                    <td>{{talla}}</td>
                                                     <td>
-                                                        <input type="text" size="3" maxlength="3" />
+                                                        <input type="text" size="3" maxlength="3" name="" />
                                                     </td>
                                                     <td>
-                                                        <input type="button" />
+                                                        <a href="#" class="btn btn-default" onclick="AsignAllColors(this)"><span class="glyphicon glyphicon-arrow-right"></a>
                                                     </td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
+                                                    <td ng-repeat-start="color in refdetail.Colores">
+                                                        <input type="hidden" size="3" maxlength="3" name="plu" />
+                                                        <input type="hidden" size="3" maxlength="3" name="talla" />
+                                                        <input type="hidden" size="3" maxlength="3" name="color" />
+                                                        <input type="text" size="3" maxlength="3" name="cantidad" />
                                                     </td>
-                                                    <td>/ 30</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 100</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 30</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 100</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>8</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 30</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 100</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>10</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 30</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 100</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>12</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 30</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 100</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>14</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 30</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 100</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>16</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 30</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 100</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
-                                                    <td>
-                                                        <input type="text" size="3" maxlength="3" />
-                                                    </td>
-                                                    <td>/ 80</td>
+                                                    <td ng-repeat-end="">/ 30</td>
                                                     <td>
                                                         <input type="text" size="3" maxlength="3" />
                                                     </td>
                                                 </tr>
                                             </table>
-                                        </div>
+                                        </div>s
                                     </div>
                                 </div>
 

@@ -31,7 +31,9 @@ namespace Hermeco.Multimarcas
             bundles.Add(new ScriptBundle("~/bundles/angularjs")
                     .IncludeDirectory("~/Scripts/Controllers", "*.js") 
                     .Include("~/Scripts/Multimarcas.js")
+                    .Include("~/Scripts/CartUtil.js")
                     .Include("~/Scripts/angular-endless-scroll.min.js"));
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

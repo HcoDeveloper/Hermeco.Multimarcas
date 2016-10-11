@@ -30,7 +30,7 @@ namespace Hermeco.Multimarcas.Controllers.Api
             var page = System.Convert.ToInt32(HttpContext.Current.Request.QueryString["page"]);
 
             ReferenciaService rs = new ReferenciaService();
-            var referencias = rs.GetReferenciasByOferta(Nit ,id, System.Convert.ToInt32(page), true);
+            var referencias = rs.GetReferenciasByOferta(Nit ,id, System.Convert.ToInt32(page), true, true);
 
             HttpContext.Current.Response.AppendHeader("pages", rs.GetPagesLastQuery().ToString());
             HttpResponseMessage msg = new HttpResponseMessage();
@@ -38,9 +38,5 @@ namespace Hermeco.Multimarcas.Controllers.Api
             msg.StatusCode = HttpStatusCode.OK;
             return msg;
          }
-
-        
-        
-
     }
 }

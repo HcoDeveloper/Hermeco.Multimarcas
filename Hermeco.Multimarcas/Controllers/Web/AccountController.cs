@@ -44,5 +44,13 @@ namespace Hermeco.Multimarcas.Controllers
             }
             return View();
         }
+
+        public ActionResult Logout()
+        {
+            Session["userInfo"] = null;
+            Session["UserNit"] = null;
+            Session["UserName"] = null;
+            return View();
+        }
     }
 }

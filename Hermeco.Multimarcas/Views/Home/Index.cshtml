@@ -7,6 +7,7 @@
     <title>Offorss</title>
     <script type="text/javascript">
         var apiBaseUrl = '@Url.Content(Hermeco.Multimarcas.WebApiConfig.UrlPrefixRelative)';
+        var webBaseUrl = '@Url.Content("~/")';
     </script>
     <!--[if lte IE 8]>
        <script>
@@ -27,7 +28,7 @@
             <nav class="navbar navbar-inverse navbar-static-top">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="index.html"><img src="@Url.Content("~/Content/images/logo.png")" alt="Offcorss"></a>
+                        <a class="navbar-brand" href="@Url.Content("~/")"><img src="@Url.Content("~/Content/images/logo.png")" alt="Offcorss"></a>
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#offcorss-navbar">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
@@ -54,7 +55,7 @@
                                     <li><a href="#">Ver Canasta</a></li>
                                 </ul>
                             </li>
-                            <li><a href="login.html">Salida Segura</a></li>
+                            <li><a href="@Url.Content("~/")Logout">Salida Segura</a></li>
                         </ul>
                     </div>
                 </div>
@@ -71,11 +72,9 @@
                         <h4 class="modal-title">Mi Cartera</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Cupo de Crédito: {{infoCliente.CupoCredito}} </p>
-                        <p>Cartera: {{infoCliente.Cartera}}</p>
-                        <p>Pedidos: </p>
-                        <p>Cupo Disponible: {{infoCliente.CupoDisponible}}</p>
-                        <p>Estado del Cliente: {{infoCliente.EstadoCliente}}</p>
+                        <p>Cupo de Crédito: {{infoCliente.CupoCredito | currency}} </p>
+                        <p>Cartera: {{infoCliente.Cartera | currency}}</p>
+                        <p>Cupo Disponible: {{infoCliente.CupoDisponible | currency}}</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-defaul" data-dismiss="modal">Cerrar</button>

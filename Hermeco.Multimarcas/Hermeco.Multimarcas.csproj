@@ -95,6 +95,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -178,6 +179,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\AccountController.cs" />
     <Compile Include="Controllers\Api\CatalogoController.cs" />
+    <Compile Include="Controllers\Api\ItemPedido.cs" />
+    <Compile Include="Controllers\Api\PedidoController.cs" />
     <Compile Include="Controllers\Api\ReferenciaController.cs" />
     <Compile Include="Controllers\Security.cs" />
     <Compile Include="Controllers\Web\AccountController.cs" />
@@ -204,8 +207,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-endless-scroll.min.js" />
+    <Content Include="Scripts\CartUtil.js" />
     <Content Include="Scripts\Controllers\CatalogoController.js" />
     <Content Include="Scripts\Controllers\OfertaController.js" />
+    <Content Include="Scripts\Controllers\PedidoController.js" />
     <Content Include="Scripts\css3-mediaqueries.js" />
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\Multimarcas.js" />
@@ -240,6 +245,8 @@
     <Content Include="Views\Home\Ofertas.cshtml" />
     <None Include="Properties\PublishProfiles\Hermeco.pubxml" />
     <None Include="Properties\PublishProfiles\Pruebassvr.pubxml" />
+    <Content Include="Views\Home\Pedido.cshtml" />
+    <Content Include="Views\Account\Logout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hermeco.Multimarcas.Services\Hermeco.Multimarcas.Services.csproj">
