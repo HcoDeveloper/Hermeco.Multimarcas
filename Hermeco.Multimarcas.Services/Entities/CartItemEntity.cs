@@ -12,7 +12,7 @@ namespace Hermeco.Multimarcas.Services.Entities
         public virtual string Nit { get; set; }
         public virtual int Oferta { get; set; }
         public virtual string Referencia { get; set; }
-        public virtual int Plu { get; set; }
+        public virtual string Plu { get; set; }
         public virtual string Talla { get; set; }
         public virtual string Color { get; set; }
         public virtual int Cantidad { get; set; }

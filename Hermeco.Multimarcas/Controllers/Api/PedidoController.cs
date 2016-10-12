@@ -9,6 +9,7 @@ using System.Web;
 using Hermeco.Multimarcas.Controllers.Api;
 using Hermeco.Multimarcas.Services;
 using Hermeco.Multimarcas.Services.Entities;
+using Hermeco.Multimarcas.Services.BusinessObjects;
 
 namespace Hermeco.Multimarcas.Controllers
 {
@@ -21,7 +22,10 @@ namespace Hermeco.Multimarcas.Controllers
             HttpResponseMessage msg = new HttpResponseMessage();
             if (Session["UserNit"] != null)
             {
-                //msg.Content = new ObjectContent<object>(referencias, new System.Net.Http.Formatting.JsonMediaTypeFormatter());
+                string Nit = Session["UserNit"].ToString();
+                PedidoService ps = new PedidoService();
+                List<Referencia> referencias = ps.GetCartItemsByNit(Nit);
+                msg.Content = new ObjectContent<object>(referencias, new System.Net.Http.Formatting.JsonMediaTypeFormatter());
                 msg.StatusCode = HttpStatusCode.OK;
                 return msg;
             }

@@ -125,7 +125,7 @@
                                                 <div class="linea_separador"></div>
                                             </div>
                                             <div class="clearfix"></div>
-                                            <table>
+                                            <table id="ItemPedido">
                                                 <tr>
                                                     <td colspan="3"></td>
                                                     <td colspan="2" ng-repeat="color in refdetail.Colores">
@@ -152,6 +152,7 @@
                                                         <a href="#" class="btn btn-default" onclick="AsignAllColors(this)"><span class="glyphicon glyphicon-arrow-right"></a>
                                                     </td>
                                                     <td ng-repeat-start="color in refdetail.Colores">
+                                                        <input type="hidden" size="3" maxlength="3" name="referencia" value="{{refdetail.IdReferencia}}" />
                                                         <input type="hidden" size="3" maxlength="3" name="oferta" value="{{refdetail.IdOferta}}" />
                                                         <span ng-repeat="plu in refdetail.Plu | filter:{Talla: talla, Color: color}:true">
                                                             <input type="hidden" size="3" maxlength="3" name="plu" value="{{plu.Codigo}}" />
@@ -188,7 +189,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-defaul" data-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="AgregarItem()" >Agregar</button>
                             </div>
                         </div>
                     </div>
