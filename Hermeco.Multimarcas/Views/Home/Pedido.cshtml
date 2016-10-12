@@ -6,7 +6,6 @@
                 <div class="pedido-titulos">
                     <div class="col-md-2">
                         <label>Color</label>
-                       
                     </div>
                     <div class="col-md-8">
                             <div class="col-md-3"><label>Descripcion</label></div>
@@ -17,35 +16,45 @@
                     <div class="col-md-2">
                         <label>Total</label>
                     </div>
+                    
+                </div>
+                <div class="alert alert-warning">
+                    Mensaje de Error!!!
                 </div>
                 <div class="productos-pedido">
+                    
                     <div class="producto-pedido" ng-repeat="referencia in refPedido">
-                            <div class="col-md-12">
-                                <div><span class="glyphicon glyphicon-remove"></span></div>
-                            </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12" ng-repeat="color in referencia.Colores">
                                 <div class="col-md-12">
                                     <div class="col-md-2">
-
-                                        <div class="pedido-imagen">
-                                            <img class="img-responsive center" data-ng-src="data:image/JPEG;base64,{{referencia.Imagenes[0].Imagen}}" />
+                                        <div class="pedido-imagen" ng-repeat="Imagen in referencia.Imagenes | filter:{DescripcionColor: color} ">
+                                            <img class="img-responsive center" data-ng-src="data:image/JPEG;base64,{{Imagen.Imagen}}" />
                                         </div>
-
                                     </div>
                                     <div class="col-md-2">
-                                        <label>Ref: </label> {{referencia.IdReferencia}}
+                                        <label>Ref: </label> {{referencia.IdReferencia}} - {{referencia.IdOferta}}
                                         <div>{{referencia.plu[0].descripcion}}</div>
-                                        <div><label>Precio: </label>{{referencia.Plu[0].Precio | currency}}</div>
-                                        <div><label>Oferta: </label>{{referencia.Plu[0].Precio | currency}}</div>
+                                        <div><label>Precio: </label> $ {{formatNumber(referencia.Plu[0].Precio)}}</div>
+                                        <div><label>Oferta: </label> $ {{formatNumber(referencia.Plu[0].Precio)}}</div>
+                                        <div><label>Color: </label> {{color}}</div>
+                                        <a href="" target="_self">Editar</a><span> | </span><a href="" target="_self">Eliminar</a>
+
                                     </div>
                                     <div class="col-md-6" >
-                                        <div class="col-md-12" ng-repeat="plu in referencia.Plu | filter: lessThan('Cantidad', 0)">
+                                        <div class="col-md-12" ng-repeat="plu in referencia.Plu | filter: {Color: color }">
                                             <div class="col-md-4">{{plu.Talla}}</div>
-                                            <div class="col-md-4"><input name="cantidad" type="text" value="{{plu.Cantidad}}" maxlength="3" size="3" /><span class="glyphicon glyphicon-remove"></span> </div>
+                                            <div class="col-md-4">
+                                                <span class="glyphicon glyphicon-minus"></span> 
+                                                <input name="cantidad" type="text" value="{{plu.Cantidad}}" maxlength="3" size="3" />
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                                <span ng-if="plu.Cantidad > plu.stock"  class="glyphicon glyphicon-remove" style="color:red"></span>
+                                                <span ng-if="plu.Cantidad <= plu.stock" class="glyphicon glyphicon-ok" style="color:green"></span>
+
+                                            </div>
                                             <div class="col-md-4">{{plu.stock}}</div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">{{referencia.Plu[0].Precio * GetSummGroup(referencia.Plu) | currency}}</div>
+                                    <div class="col-md-2">$ {{formatNumber(referencia.Plu[0].Precio * GetSummGroup(referencia.Plu))}}</div>
                                 </div>
                                 <span style="margin-top:2px;">&nbsp;</span>
                                 <hr style="color:black; background-color:black; width:75%;" />

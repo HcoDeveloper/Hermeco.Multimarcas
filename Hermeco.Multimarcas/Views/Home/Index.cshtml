@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Offorss</title>
+    <title>Offcorss</title>
     <script type="text/javascript">
         var apiBaseUrl = '@Url.Content(Hermeco.Multimarcas.WebApiConfig.UrlPrefixRelative)';
         var webBaseUrl = '@Url.Content("~/")';
@@ -47,7 +47,7 @@
                         </form>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="active"><a href="/">Ofertas</a></li>
-                            <li><a href="/Pedido"><span class="glyphicon glyphicon-shopping-cart"></span><div class="circulo"></div></a></li>
+                            <li><a href="@Url.Content("~/")Pedido"><span class="glyphicon glyphicon-shopping-cart"></span><div class="circulo"></div></a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{infoCliente.NombreCliente}} <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">

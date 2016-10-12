@@ -18,6 +18,10 @@
             return item[prop] > val;
         }
     }
+
+    $scope.formatNumber = function (number) {
+        return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+    }
 }]
 
 PedidoController.$inject = ['$scope', '$http', '$routeParams'];

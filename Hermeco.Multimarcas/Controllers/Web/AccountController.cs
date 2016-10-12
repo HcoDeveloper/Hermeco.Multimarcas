@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Data.Entity.Spatial;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Security.Membership;
+using Hermeco.Multimarcas.Services;
+using Hermeco.Multimarcas.Services.BusinessObjects;
 
 namespace Hermeco.Multimarcas.Controllers
 {
@@ -22,6 +24,18 @@ namespace Hermeco.Multimarcas.Controllers
                 Boolean bLogeado = false;
                 String ip = Request.ServerVariables["REMOTE_ADDR"];
                 UserInfo userInfo = UserController.ValidateUser(0, userName, password, "", "", ip, ref loginStatus);
+                ClienteService cs = new ClienteService();
+                try
+                {
+                    Cliente cliente = cs.getInfoClient(userInfo.Profile.GetProperty("VendorId").PropertyValue);
+                }
+                catch (Exception)
+                {
+                    ViewData["Message"] = "Ha ocurrido un error interno!";
+                    ViewBag.Result = true;
+                    return View();
+                }
+
                 if (userInfo != null && loginStatus == UserLoginStatus.LOGIN_SUCCESS)
                 {
                     Session["userInfo"] = userInfo;

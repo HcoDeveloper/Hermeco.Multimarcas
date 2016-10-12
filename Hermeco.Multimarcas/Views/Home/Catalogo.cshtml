@@ -34,6 +34,8 @@
                             </div>
                             <div class="info-producto">
                                 <p>{{referencia.Plu[0].Descripcion}}</p>
+                                <p>{{referencia.Plu[0].Precio | currency}}</p>
+                                <p>{{referencia.Plu[0].Precio | currency}}</p>
                             </div>
                             <button class="btn btn-block" data-target="#info-producto" data-toggle="modal" ng-click="loadReferencia(referencia.IdOferta, referencia.IdReferencia)">Agregar</button>
                         </div>

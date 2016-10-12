@@ -184,6 +184,7 @@
     <Compile Include="Controllers\Api\ReferenciaController.cs" />
     <Compile Include="Controllers\Security.cs" />
     <Compile Include="Controllers\Web\AccountController.cs" />
+    <Compile Include="Controllers\Web\ClientService.cs" />
     <Compile Include="Controllers\Web\HomeController.cs" />
     <Compile Include="Controllers\Api\OfertaController.cs" />
     <Compile Include="Global.asax.cs">
