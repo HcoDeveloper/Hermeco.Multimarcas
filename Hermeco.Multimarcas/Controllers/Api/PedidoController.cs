@@ -45,6 +45,7 @@ namespace Hermeco.Multimarcas.Controllers
                 PedidoService ps = new PedidoService();
                 foreach( ItemPedido item in items ){
                     CartItemEntity cie = new CartItemEntity();
+                    cie.Id = item.Id;
                     cie.Nit = Session["UserNit"].ToString();
                     cie.Referencia = item.Referencia;
                     cie.Oferta = item.Oferta;

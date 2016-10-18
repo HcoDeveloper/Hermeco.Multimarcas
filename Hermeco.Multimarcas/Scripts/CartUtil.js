@@ -33,16 +33,18 @@ function AgregarItem() {
 
         for (var j = 3, col; col = row.cells[j]; j++) {
 
-            var referencia = col.getElementsByTagName("input")[0];
-            var oferta = col.getElementsByTagName("input")[1];
-            var plu = col.getElementsByTagName("input")[2];
-            var talla = col.getElementsByTagName("input")[3];
-            var color = col.getElementsByTagName("input")[4];
-            var cantidad = col.getElementsByTagName("input")[5];
+            var id = col.getElementsByTagName("input")[0];
+            var referencia = col.getElementsByTagName("input")[1];
+            var oferta = col.getElementsByTagName("input")[2];
+            var plu = col.getElementsByTagName("input")[3];
+            var talla = col.getElementsByTagName("input")[4];
+            var color = col.getElementsByTagName("input")[5];
+            var cantidad = col.getElementsByTagName("input")[6];
 
             if (plu != undefined || cantidad != undefined) {
 
                 item = {}
+                item["Id"] = id.value;
                 item["Plu"] = plu.value;
                 item["Referencia"] = referencia.value;
                 item["Oferta"] = oferta.value;
@@ -66,6 +68,9 @@ function AgregarItem() {
         data: JSON.stringify(jsonObj),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json'
+    }).done(function () {
+        console.log("Success");
+        angular.element(document.getElementById('offcorssApp')).scope().reload();
     });
 
 }

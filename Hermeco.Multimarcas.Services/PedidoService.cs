@@ -25,7 +25,15 @@ namespace Hermeco.Multimarcas.Services
             var connectionString = ConfigurationManager.ConnectionStrings["dbComercial"].ConnectionString;
             using (var session = SessionManager.OpenSession(connectionString))
             {
-                session.SaveOrUpdate(entity);
+                if (entity.Id == 0)
+                {
+                    session.Save(entity);
+                }
+                else
+                {
+                    session.Update(entity);
+                    session.Flush();
+                }
             }
             return 1;
         }
@@ -33,7 +41,7 @@ namespace Hermeco.Multimarcas.Services
         public List<Referencia> GetCartItemsByNit(string Nit)
         {
             List<Referencia> referencias = new List<Referencia>();
-            List<CartItemEntity> cartItems = new List<CartItemEntity>();
+            List<CartItemEntity> cartItems = null;
             var connectionString = ConfigurationManager.ConnectionStrings["dbComercial"].ConnectionString;
             using (var session = SessionManager.OpenSession(connectionString))
             {
@@ -42,27 +50,56 @@ namespace Hermeco.Multimarcas.Services
                                          orderby c.Referencia, c.Plu 
                                          select c).ToList();
             }
+            if (cartItems != null && cartItems.Count > 0)
+            {
+                ReferenciaService rs = new ReferenciaService();
+                Referencia referencia = rs.GetReferencia(cartItems[0].Oferta, cartItems[0].Referencia, true);
+                foreach (CartItemEntity cartItem in cartItems)
+                {
+                    if (referencia.IdReferencia != cartItem.Referencia)
+                    {
+                        referencias.Add(referencia);
+                        referencia = rs.GetReferencia(cartItem.Oferta, cartItem.Referencia, true);
+                    }
+                    Plu plu = referencia.Plu.Find(x => x.PLU == cartItem.Plu);
+                    int index = referencia.Plu.IndexOf(plu);
+                    plu.Cantidad = cartItem.Cantidad;
+                    plu.itemId = cartItem.Id;
+                    referencia.Plu[index] = plu;
+                }
+                if (cartItems.Count > 0)
+                {
+                    referencias.Add(referencia);
+                }
+            }
+            return referencias;
+        }
 
+        public Referencia GetCartItemById(string Nit, int oferta, string sReferencia)
+        {
+            Referencia referencias = new Referencia();
+            List<CartItemEntity> cartItems = null;
+            var connectionString = ConfigurationManager.ConnectionStrings["dbComercial"].ConnectionString;
+            using (var session = SessionManager.OpenSession(connectionString))
+            {
+                cartItems = (from c in session.Query<CartItemEntity>()
+                            where c.Oferta.Equals(oferta) && c.Referencia.Equals(sReferencia) && c.Nit.Equals(Nit)
+                            orderby c.Referencia, c.Plu
+                            select c).ToList();
+            }
             ReferenciaService rs = new ReferenciaService();
-            Referencia referencia = rs.GetReferencia(cartItems[0].Oferta, cartItems[0].Referencia, true ); ;
+            Referencia referencia = rs.GetReferencia(oferta, sReferencia, true);
             foreach (CartItemEntity cartItem in cartItems)
             {
-                if(referencia.IdReferencia != cartItem.Referencia){
-                    referencias.Add(referencia);
-                    referencia = rs.GetReferencia(cartItem.Oferta, cartItem.Referencia, true);
-                }
                 Plu plu = referencia.Plu.Find(x => x.PLU == cartItem.Plu);
-                int index =  referencia.Plu.IndexOf(plu);
+                int index = referencia.Plu.IndexOf(plu);
                 plu.Cantidad = cartItem.Cantidad;
+                plu.itemId = cartItem.Id;
                 referencia.Plu[index] = plu;
             }
-            if (cartItems.Count > 0)
-            {
-                referencias.Add(referencia);
-            }
-            
-            return referencias;
-        } 
+            return referencia;
+        }
+
 
         public Boolean ValidateItem( string Plu, int Cantidad)
         {

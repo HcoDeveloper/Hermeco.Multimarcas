@@ -1,8 +1,14 @@
-﻿var CatalogoController =  ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
-    $http.get(apiBaseUrl + '/oferta')
-       .then(function (response) {
-           $scope.ofertas = response.data;
-       });    
+﻿var CatalogoController =  ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams, $rootScope) {
+    $('body').removeClass('loaded');
+    $http.get(apiBaseUrl + '/oferta/?oferta=' + $routeParams.oferta)
+    .success(function (data, status, headers) {
+        $scope.ofertas = data;
+        $scope.ofertaActiva = headers('ofertaActiva');
+        console.log($scope.ofertaActiva);
+    })
+    .finally(function () {
+        //$('body').addClass('loaded');
+    });    
     $http.get(apiBaseUrl + '/Account')
        .then(function (response) {
            $scope.infoCliente = response.data;
@@ -11,7 +17,7 @@
         if ($scope.running) return;
         $scope.page = page;
         $scope.running = true;
-        $scope.loading = true;
+        //$scope.loading = true;
         $http.get(apiBaseUrl + '/catalogo/?oferta=' + $routeParams.oferta + "&page=" + page)
         .success(function (data, status, headers) {
             // Create an array if not already created
@@ -23,7 +29,8 @@
         })
         .finally(function () {
             // Flag loading as complete
-            $scope.loading = false;
+            $('body').addClass('loaded');
+            //$scope.loading = false;
             $scope.running = false;
         });
     }
@@ -61,4 +68,4 @@
 
 }]
 
-CatalogoController.$inject = ['$scope', '$http', '$routeParams'];
+CatalogoController.$inject = ['$scope', '$http', '$routeParams', '$rootScope'];

@@ -7,6 +7,7 @@ namespace Hermeco.Multimarcas.Controllers.Api
 {
     public class ItemPedido
     {
+        public int Id { get; set; }
         public string Plu { get; set; }
         public string Referencia { get; set; }
         public int Oferta { get; set; }

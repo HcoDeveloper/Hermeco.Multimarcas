@@ -9,6 +9,7 @@ using System.Configuration;
 using Hermeco.Multimarcas.Services;
 using Hermeco.Multimarcas.Services.Entities;
 using NHibernate.Linq;
+using Hermeco.Multimarcas.Services.BusinessObjects;
 
 namespace Hermeco.Multimarcas.Controllers
 {
@@ -16,26 +17,21 @@ namespace Hermeco.Multimarcas.Controllers
     {
         public HttpResponseMessage Get()
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["dbComercial"].ConnectionString;
-            using (var session = SessionManager.OpenSession(connectionString))
+            var Session = HttpContext.Current.Session;
+            string id = (string)Session["UserNit"];
+            int idOferta = 0;
+            if (HttpContext.Current.Request.QueryString["oferta"].ToString() != "undefined")
             {
-                var Session = HttpContext.Current.Session;
-                string id = (string) Session["UserNit"];
-
-                OfertaEntity oferta = null;
-                ClienteOfertaEntity clienteOferta = null;
-
-                var ofertas = ( from o in session.Query<OfertaEntity>()
-                                    join co in session.Query<ClienteOfertaEntity>() on
-                                      o.Id equals co.IdOferta
-                                      where co.IdCliente.Contains(id)
-                                      && DateTime.Now >= o.FechaPublicacion && DateTime.Now  <= o.FechaVencimiento
-                                select o).ToList();
-                HttpResponseMessage msg = new HttpResponseMessage();
-                msg.Content = new ObjectContent<object>(ofertas, new System.Net.Http.Formatting.JsonMediaTypeFormatter());
-                msg.StatusCode = HttpStatusCode.OK;
-                return msg;
+                idOferta = System.Convert.ToInt32(HttpContext.Current.Request.QueryString["oferta"]);
             }
+            
+            HttpContext.Current.Response.AppendHeader("ofertaActiva", idOferta.ToString());
+            OfertaService os = new OfertaService();
+            List<Oferta>  ofertas = os.GetOfertasByNit(id, idOferta);
+            HttpResponseMessage msg = new HttpResponseMessage();
+            msg.Content = new ObjectContent<object>(ofertas, new System.Net.Http.Formatting.JsonMediaTypeFormatter());
+            msg.StatusCode = HttpStatusCode.OK;
+            return msg;
         }
     }
 }

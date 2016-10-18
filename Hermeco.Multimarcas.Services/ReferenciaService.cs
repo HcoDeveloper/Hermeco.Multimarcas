@@ -71,6 +71,30 @@ namespace Hermeco.Multimarcas.Services
             }
         }
 
+        public List<Referencia> GetAllReferenciasByOferta(string Nit, int Oferta)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["dbComercial"].ConnectionString;
+            int pageSize = System.Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
+            using (var session = SessionManager.OpenSession(connectionString))
+            {
+                List<Referencia> referencias = new List<Referencia>();
+                var referenciasEntity = (from r in session.Query<ReferenciaOfertasEntity>()
+                                         join co in session.Query<ClienteOfertaEntity>() on
+                                         r.IdOferta equals co.IdOferta
+                                         where co.IdOferta.Equals(Oferta) && r.Activa.Equals(true)
+                                         && co.IdCliente.Equals(Nit)
+                                         orderby r.IdReferencia
+                                         select r);
+                foreach (ReferenciaOfertasEntity referencia in referenciasEntity)
+                {
+                    Referencia refe = fillReferencia(referencia);
+                    fillPlu(ref refe);
+                    referencias.Add(refe);
+                }
+                return referencias;
+            }
+        }
+
         public Referencia GetReferencia(int OfertaId,String RefId, Boolean loadImages = false){
             var connectionString = ConfigurationManager.ConnectionStrings["dbComercial"].ConnectionString;
             int pageSize = System.Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
@@ -107,51 +131,51 @@ namespace Hermeco.Multimarcas.Services
             return refe;
         }
 
-        private void fillPlu(ref Referencia referencia)
+        public void fillPlu(ref Referencia referencia)
         {
             CustomerService cs = new CustomerService();
             DataSet dsMaterial = cs.ObtenerMaterialCustomerService(referencia.IdReferencia);
             foreach(DataRow dr in dsMaterial.Tables[0].Rows ){
-                referencia.Plu.Add(new Plu { 
-                    Codigo = dr["PLU"] == DBNull.Value ? "":  dr["PLU"].ToString(),
-                    Color = dr["COLOR"] == DBNull.Value ? "" : dr["COLOR"].ToString(),
-                    Talla = dr["CODIGOTALLA"] == DBNull.Value ? "" : dr["CODIGOTALLA"].ToString(), 
-                    Precio = System.Convert.ToInt32( dr["PRECIO"] == DBNull.Value ? "":  dr["PRECIO"]),
-                    GrupoArticulo = dr["GRUPOART"] == DBNull.Value ? "":  dr["GRUPOART"].ToString(),
-                    AnoVenta = dr["ANOVENTA"] == DBNull.Value ? "":  dr["ANOVENTA"].ToString(),
-                    Clase = dr["CLASE"] == DBNull.Value ? "":  dr["CLASE"].ToString(),
-                    CodigoColor = dr["CODIGOCOLOR"] == DBNull.Value ? "":  dr["CODIGOCOLOR"].ToString(),
-                    Coleccion = dr["COLECCION"] == DBNull.Value ? "":  dr["COLECCION"].ToString(),
-                    ConcDiseno = dr["CONCDISENO"] == DBNull.Value ? "":  dr["CONCDISENO"].ToString(),
-                    DenomGrupoArtiulo = dr["DENOMGRUPOART"] == DBNull.Value ? "":  dr["DENOMGRUPOART"].ToString(),
-                    DenomIVA = System.Convert.ToDouble(dr["DENOMIVA"] == DBNull.Value ? "":  dr["DENOMIVA"].ToString()),
-                    Descripcion = dr["DESCRIPMATERIAL"] == DBNull.Value ? "" : dr["DESCRIPMATERIAL"].ToString(),
-                    Destino = dr["DESTINO"] == DBNull.Value ? "":  dr["DESTINO"].ToString(),
-                    Edad = dr["EDAD"] == DBNull.Value ? "":  dr["EDAD"].ToString(),
-                    Edad1 = dr["EDAD1"] == DBNull.Value ? "":  dr["EDAD1"].ToString(),
-                    FechaInicio = dr["FECHAINICIO"] == DBNull.Value ? "":  dr["FECHAINICIO"].ToString(),
-                    FechaFin = dr["FECHAFIN"] == DBNull.Value ? "":  dr["FECHAFIN"].ToString(),
-                    Genero = dr["GENERO"] == DBNull.Value ? "":  dr["GENERO"].ToString(),
-                    Genero1 = dr["GENERO1"] == DBNull.Value ? "":  dr["GENERO1"].ToString(),
-                    GrupoArticuloExt = dr["GRUPOARTEXT"] == DBNull.Value ? "":  dr["GRUPOARTEXT"].ToString(),
-                    IVA = System.Convert.ToInt32(dr["IVA"] == DBNull.Value ? "":  dr["IVA"].ToString()),
-                    Marca = dr["MARCA"] == DBNull.Value ? "":  dr["MARCA"].ToString(),
-                    MesVenta = dr["MESVENTA"] == DBNull.Value ? "":  dr["MESVENTA"].ToString(),
-                    Moneda = dr["MONEDA"] == DBNull.Value ? "":  dr["MONEDA"].ToString(),
-                    PaisOrigen = dr["PAISORIG"] == DBNull.Value ? "":  dr["PAISORIG"].ToString(),
-                    PLU = dr["PLU"] == DBNull.Value ? "":  dr["PLU"].ToString(),
-                    //Saldo = System.Convert.ToDouble(dr["SALDO"] == DBNull.Value ? "":  dr["SALDO"].ToString()),
-                    stock = System.Convert.ToDouble(dr["STOCK"] == DBNull.Value ? "":  dr["STOCK"].ToString()),
-                    SubLinea = dr["SUBLINEA"] == DBNull.Value ? "":  dr["SUBLINEA"].ToString(),
-                    SubLinea1 = dr["SUBLINEA1"] == DBNull.Value ? "":  dr["SUBLINEA1"].ToString(),
-                    TipoMaterial = dr["TIPOMAT"] == DBNull.Value ? "":  dr["TIPOMAT"].ToString(),
-                    TipoNegocio = dr["TIPONEGOCIO"] == DBNull.Value ? "":  dr["TIPONEGOCIO"].ToString(),
-                    TipoNegocio1 = dr["TIPONEGOC"] == DBNull.Value ? "":  dr["TIPONEGOC"].ToString(),
-                    TipoReferencia = dr["TIPOREFERENCIA"] == DBNull.Value ? "":  dr["TIPOREFERENCIA"].ToString(),
-                    TipoTejido = dr["TIPOTEJIDO"] == DBNull.Value ? "":  dr["TIPOTEJIDO"].ToString(),
-                    ValorComposicion = dr["VALORCOMPOSICION"] == DBNull.Value ? "":  dr["VALORCOMPOSICION"].ToString()
-                });
-
+                Plu plu = new Plu();
+                plu.Codigo = dr["PLU"] == DBNull.Value ? "":  dr["PLU"].ToString();
+                plu.Color = dr["COLOR"] == DBNull.Value ? "" : dr["COLOR"].ToString();
+                plu.Talla = dr["CODIGOTALLA"] == DBNull.Value ? "" : dr["CODIGOTALLA"].ToString(); 
+                plu.Precio = System.Convert.ToInt32( dr["PRECIO"] == DBNull.Value ? "":  dr["PRECIO"]);
+                plu.GrupoArticulo = dr["GRUPOART"] == DBNull.Value ? "":  dr["GRUPOART"].ToString();
+                plu.AnoVenta = dr["ANOVENTA"] == DBNull.Value ? "":  dr["ANOVENTA"].ToString();
+                plu.Clase = dr["CLASE"] == DBNull.Value ? "":  dr["CLASE"].ToString();
+                plu.CodigoColor = dr["CODIGOCOLOR"] == DBNull.Value ? "":  dr["CODIGOCOLOR"].ToString();
+                plu.Coleccion = dr["COLECCION"] == DBNull.Value ? "":  dr["COLECCION"].ToString();
+                plu.ConcDiseno = dr["CONCDISENO"] == DBNull.Value ? "":  dr["CONCDISENO"].ToString();
+                plu.DenomGrupoArtiulo = dr["DENOMGRUPOART"] == DBNull.Value ? "":  dr["DENOMGRUPOART"].ToString();
+                plu.DenomIVA = System.Convert.ToDouble(dr["DENOMIVA"] == DBNull.Value ? "":  dr["DENOMIVA"].ToString());
+                plu.Descripcion = dr["DESCRIPMATERIAL"] == DBNull.Value ? "" : dr["DESCRIPMATERIAL"].ToString();
+                plu.Destino = dr["DESTINO"] == DBNull.Value ? "":  dr["DESTINO"].ToString();
+                plu.Edad = dr["EDAD"] == DBNull.Value ? "":  dr["EDAD"].ToString();
+                plu.Edad1 = dr["EDAD1"] == DBNull.Value ? "":  dr["EDAD1"].ToString();
+                plu.FechaInicio = dr["FECHAINICIO"] == DBNull.Value ? "":  dr["FECHAINICIO"].ToString();
+                plu.FechaFin = dr["FECHAFIN"] == DBNull.Value ? "":  dr["FECHAFIN"].ToString();
+                plu.Genero = dr["GENERO"] == DBNull.Value ? "":  dr["GENERO"].ToString();
+                plu.Genero1 = dr["GENERO1"] == DBNull.Value ? "":  dr["GENERO1"].ToString();
+                plu.GrupoArticuloExt = dr["GRUPOARTEXT"] == DBNull.Value ? "":  dr["GRUPOARTEXT"].ToString();
+                plu.IVA = System.Convert.ToInt32(dr["IVA"] == DBNull.Value ? "":  dr["IVA"].ToString());
+                plu.Marca = dr["MARCA"] == DBNull.Value ? "":  dr["MARCA"].ToString();
+                plu.MesVenta = dr["MESVENTA"] == DBNull.Value ? "":  dr["MESVENTA"].ToString();
+                plu.Moneda = dr["MONEDA"] == DBNull.Value ? "":  dr["MONEDA"].ToString();
+                plu.PaisOrigen = dr["PAISORIG"] == DBNull.Value ? "":  dr["PAISORIG"].ToString();
+                plu.PLU = dr["PLU"] == DBNull.Value ? "":  dr["PLU"].ToString();
+                //Saldo = System.Convert.ToDouble(dr["SALDO"] == DBNull.Value ? "":  dr["SALDO"].ToString());
+                plu.stock = System.Convert.ToDouble(dr["STOCK"] == DBNull.Value ? "":  dr["STOCK"].ToString());
+                plu.SubLinea = dr["SUBLINEA"] == DBNull.Value ? "":  dr["SUBLINEA"].ToString();
+                plu.SubLinea1 = dr["SUBLINEA1"] == DBNull.Value ? "":  dr["SUBLINEA1"].ToString();
+                plu.TipoMaterial = dr["TIPOMAT"] == DBNull.Value ? "":  dr["TIPOMAT"].ToString();
+                plu.TipoNegocio = dr["TIPONEGOCIO"] == DBNull.Value ? "":  dr["TIPONEGOCIO"].ToString();
+                plu.TipoNegocio1 = dr["TIPONEGOC"] == DBNull.Value ? "":  dr["TIPONEGOC"].ToString();
+                plu.TipoReferencia = dr["TIPOREFERENCIA"] == DBNull.Value ? "":  dr["TIPOREFERENCIA"].ToString();
+                plu.TipoTejido = dr["TIPOTEJIDO"] == DBNull.Value ? "":  dr["TIPOTEJIDO"].ToString();
+                plu.ValorComposicion = dr["VALORCOMPOSICION"] == DBNull.Value ? "":  dr["VALORCOMPOSICION"].ToString();
+                plu.Mundo = Utility.GetMundo(plu.Genero, plu.Edad);
+                referencia.Plu.Add(plu);
                 if (!referencia.Colores.Contains(dr["COLOR"].ToString()))
                 {
                     referencia.Colores.Add(dr["COLOR"].ToString());
@@ -163,6 +187,8 @@ namespace Hermeco.Multimarcas.Services
                 }
             }
         }
+
+        
 
         private void fillImages(ref Referencia referencia, Boolean juegoCompleto = true)
         {

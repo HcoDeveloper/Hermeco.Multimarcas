@@ -89,5 +89,39 @@ namespace Hermeco.Multimarcas.Services
             return null;
         }
 
+        public static string GetMundo(string Genero, string Edad)
+        {
+            string strMundo = Edad;
+            string strGenero = Genero;
+            string NombreMundo = string.Empty;
+            switch (strMundo)
+            {
+                case "NIÑOS":
+                    switch (strGenero)
+                    {
+                        case "FEMENINO":
+                            NombreMundo = "NIÑA";
+                            break;
+                        case "MASCULINO":
+                            NombreMundo = "NIÑO";
+                            break;
+                        default:
+
+                            break;
+                    }
+                    break;
+                case "BEBES":
+                    NombreMundo = "BEBE";
+                    break;
+                case "PRIMI":
+                    NombreMundo = "PRIMI";
+                    break;
+                default:
+
+                    break;
+            }
+            return NombreMundo;
+        }
+
     }
 }

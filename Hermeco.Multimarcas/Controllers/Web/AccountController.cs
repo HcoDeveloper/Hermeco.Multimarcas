@@ -28,10 +28,17 @@ namespace Hermeco.Multimarcas.Controllers
                 try
                 {
                     Cliente cliente = cs.getInfoClient(userInfo.Profile.GetProperty("VendorId").PropertyValue);
+                    if (cliente.Codigo == null)
+                    {
+                        loginStatus = UserLoginStatus.LOGIN_FAILURE;
+                        ViewData["Message"] = "No podemos validar tu cuenta en este momento";
+                        ViewBag.Result = true;
+                        return View();
+                    }
                 }
                 catch (Exception)
                 {
-                    ViewData["Message"] = "Ha ocurrido un error interno!";
+                    ViewData["Message"] = "No podemos validar tu cuenta en este momento";
                     ViewBag.Result = true;
                     return View();
                 }

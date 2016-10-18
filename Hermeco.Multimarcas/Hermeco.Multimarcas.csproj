@@ -180,6 +180,7 @@
     <Compile Include="Controllers\Api\AccountController.cs" />
     <Compile Include="Controllers\Api\CatalogoController.cs" />
     <Compile Include="Controllers\Api\ItemPedido.cs" />
+    <Compile Include="Controllers\Api\ItemPedidoController.cs" />
     <Compile Include="Controllers\Api\PedidoController.cs" />
     <Compile Include="Controllers\Api\ReferenciaController.cs" />
     <Compile Include="Controllers\Security.cs" />
@@ -200,6 +201,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\bg1.png" />
+    <Content Include="Content\images\fade-spinner.gif" />
     <Content Include="Content\images\imgpsh_fullsize.jpe" />
     <Content Include="Content\images\login.jpg" />
     <Content Include="Content\images\logo.png" />

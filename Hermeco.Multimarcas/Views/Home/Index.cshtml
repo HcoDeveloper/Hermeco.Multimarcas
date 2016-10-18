@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html xmlns:ng="http://angularjs.org" ng-app="MultimarcasApp">
+<html xmlns:ng="http://angularjs.org" >
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,8 +21,10 @@
          document.createElement('ng:view');
        </script>
      <![endif]-->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto+Condensed">
+ 
 </head>
-<body>
+<body ng-app="MultimarcasApp" id="offcorssApp">
     <div class="container-fluid">
         <div class="row top-navbar">
             <nav class="navbar navbar-inverse navbar-static-top">
@@ -72,9 +74,9 @@
                         <h4 class="modal-title">Mi Cartera</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Cupo de Crédito: {{infoCliente.CupoCredito | currency}} </p>
-                        <p>Cartera: {{infoCliente.Cartera | currency}}</p>
-                        <p>Cupo Disponible: {{infoCliente.CupoDisponible | currency}}</p>
+                        <p>Cupo de Crédito: {{infoCliente.CupoCredito}} </p>
+                        <p>Cartera: {{infoCliente.Cartera}}</p>
+                        <p>Cupo Disponible: {{infoCliente.CupoDisponible}}</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-defaul" data-dismiss="modal">Cerrar</button>

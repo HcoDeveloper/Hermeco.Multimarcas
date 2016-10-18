@@ -46,5 +46,6 @@ namespace Hermeco.Multimarcas.Services.BusinessObjects
         public double DenomIVA { get; set; }
         public int Cantidad { get; set; }
         public int itemId { get; set; }
+        public string Mundo { get; set; }
     }
 }
