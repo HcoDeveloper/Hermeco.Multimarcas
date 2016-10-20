@@ -106,9 +106,9 @@ namespace Hermeco.Multimarcas.Services
             return false;
         }
 
-        public void ValidarPedido()
+        public Boolean ValidarPedido()
         {
-
+            return true;
         }
 
         public void ProcesarPedido()

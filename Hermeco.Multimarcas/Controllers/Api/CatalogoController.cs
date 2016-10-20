@@ -30,7 +30,7 @@ namespace Hermeco.Multimarcas.Controllers.Api
             var page = System.Convert.ToInt32(HttpContext.Current.Request.QueryString["page"]);
 
             ReferenciaService rs = new ReferenciaService();
-            var referencias = rs.GetReferenciasByOferta(Nit ,id, System.Convert.ToInt32(page), true, true);
+            var referencias = rs.GetReferenciasByOferta(Nit ,id, System.Convert.ToInt32(page), true, false);
 
             HttpContext.Current.Response.AppendHeader("pages", rs.GetPagesLastQuery().ToString());
             HttpResponseMessage msg = new HttpResponseMessage();
