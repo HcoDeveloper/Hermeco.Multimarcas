@@ -111,7 +111,8 @@ namespace Hermeco.Multimarcas.Services
             }
         }
 
-        public Referencia GetReferencia(int OfertaId,String RefId, Boolean loadImages = false){
+        public Referencia GetReferencia(int OfertaId, String RefId, Boolean loadImages = false, Boolean juegoCompletoImagenes = true)
+        {
             var connectionString = ConfigurationManager.ConnectionStrings["dbComercial"].ConnectionString;
             int pageSize = System.Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
             Referencia referencia = null;
@@ -124,7 +125,7 @@ namespace Hermeco.Multimarcas.Services
                 fillPlu(ref referencia);
                 if (loadImages)
                 {
-                    fillImages(ref referencia, true);
+                    fillImages(ref referencia, juegoCompletoImagenes);
                 }
             }
             return referencia;

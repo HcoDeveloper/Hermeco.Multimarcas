@@ -25,26 +25,26 @@ namespace Hermeco.Multimarcas.Controllers
                 String ip = Request.ServerVariables["REMOTE_ADDR"];
                 UserInfo userInfo = UserController.ValidateUser(0, userName, password, "", "", ip, ref loginStatus);
                 ClienteService cs = new ClienteService();
-                try
+                if (userInfo != null && loginStatus == UserLoginStatus.LOGIN_SUCCESS)
                 {
-                    Cliente cliente = cs.getInfoClient(userInfo.Profile.GetProperty("VendorId").PropertyValue);
-                    if (cliente.Codigo == null)
+                    try
                     {
-                        loginStatus = UserLoginStatus.LOGIN_FAILURE;
+                        Cliente cliente = cs.getInfoClient(userInfo.Profile.GetProperty("VendorId").PropertyValue);
+                        if (cliente.Codigo == null)
+                        {
+                            loginStatus = UserLoginStatus.LOGIN_FAILURE;
+                            ViewData["Message"] = "No podemos validar tu cuenta en este momento";
+                            ViewBag.Result = true;
+                            return View();
+                        }
+                    }
+                    catch (Exception e)
+                    {
                         ViewData["Message"] = "No podemos validar tu cuenta en este momento";
                         ViewBag.Result = true;
                         return View();
                     }
-                }
-                catch (Exception)
-                {
-                    ViewData["Message"] = "No podemos validar tu cuenta en este momento";
-                    ViewBag.Result = true;
-                    return View();
-                }
 
-                if (userInfo != null && loginStatus == UserLoginStatus.LOGIN_SUCCESS)
-                {
                     Session["userInfo"] = userInfo;
                     string VendorId = "";
                     string FullName = "";

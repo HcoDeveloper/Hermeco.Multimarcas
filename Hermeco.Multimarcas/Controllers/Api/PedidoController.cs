@@ -10,6 +10,7 @@ using Hermeco.Multimarcas.Controllers.Api;
 using Hermeco.Multimarcas.Services;
 using Hermeco.Multimarcas.Services.Entities;
 using Hermeco.Multimarcas.Services.BusinessObjects;
+using System.Linq;
 
 namespace Hermeco.Multimarcas.Controllers
 {

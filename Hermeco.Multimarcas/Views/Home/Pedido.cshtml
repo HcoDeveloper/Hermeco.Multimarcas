@@ -27,7 +27,7 @@
                             <div class="col-md-12" ng-repeat="color in referencia.Colores">
                                 <div class="col-md-12">
                                     <div class="col-md-2">
-                                        <div class="pedido-imagen" ng-repeat="Imagen in referencia.Imagenes | filter:{DescripcionColor: color} ">
+                                        <div class="pedido-imagen" ng-repeat="Imagen in referencia.Imagenes | filter:{DescripcionColor: color}" ng-show="$first">
                                             <img class="img-responsive center" data-ng-src="data:image/JPEG;base64,{{Imagen.Imagen}}" />
                                         </div>
                                     </div>

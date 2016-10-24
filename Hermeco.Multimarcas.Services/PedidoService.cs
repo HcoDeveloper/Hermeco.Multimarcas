@@ -101,14 +101,16 @@ namespace Hermeco.Multimarcas.Services
             {
                 ReferenciaService rs = new ReferenciaService();
                 Referencia referencia = rs.GetReferencia(cartItems[0].Oferta, cartItems[0].Referencia, true);
-                List<string> Colores = new List<string>();
+                List<string> Colors = new List<string>();
                 foreach (CartItemEntity cartItem in cartItems)
                 {
                     if (cartItem.Cantidad > 0)
                     {
                         if (referencia.IdReferencia != cartItem.Referencia)
                         {
+                            referencia.Colores = Colors;
                             referencias.Add(referencia);
+                            Colors = new List<string>();
                             referencia = rs.GetReferencia(cartItem.Oferta, cartItem.Referencia, true);
                         }
                         Plu plu = referencia.Plu.Find(x => x.PLU == cartItem.Plu);
@@ -116,11 +118,15 @@ namespace Hermeco.Multimarcas.Services
                         plu.Cantidad = cartItem.Cantidad;
                         plu.itemId = cartItem.Id;
                         referencia.Plu[index] = plu;
+                        if (!Colors.Contains(plu.Color))
+                        {
+                            Colors.Add(plu.Color);
+                        }
                     }
                 }
                 if (cartItems.Count > 0)
                 {
-                    referencia.Colores = Colores;
+                    referencia.Colores = Colors;
                     referencias.Add(referencia);
                 }
             }
