@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import />
+      <s:element name="GuardarPedido">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strPedido" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GuardarPedidoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GuardarPedidoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IngresarPedido_TiendaVirtual">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strOrdenDeCompra" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IngresarPedido_TiendaVirtualResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IngresarPedido_TiendaVirtualResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarTarifaTransporteXPoblacion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="decMontoCompra" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="intCodigoPoblacion" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarTarifaTransporteXPoblacionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ConsultarTarifaTransporteXPoblacionResult" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ingresarOrdenCompra">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nitCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numeroOC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xmlMensaje" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ingresarOrdenCompraResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ingresarOrdenCompraResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="actualizarOrdenCompra">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nitCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numeroOC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xmlMensaje" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strEstado" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="actualizarOrdenCompraResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="actualizarOrdenCompraResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="consultarOrdenCompra">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="numeroOC" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="consultarOrdenCompraResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="consultarOrdenCompraResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarEstadoOrdenCompra">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DocumentoCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumeroOrden" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EstadoOrden" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarEstadoOrdenCompraResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ActualizarEstadoOrdenCompraResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerConsecutivoOrdenCompra">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObtenerConsecutivoOrdenCompraResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenerConsecutivoOrdenCompraResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerOrdenesDeCompraXCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strDocumentoCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strFechaInicial" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strFechaFinal" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerOrdenesDeCompraXClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="ObtenerOrdenesDeCompraXClienteResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="decimal" type="s:decimal" />
+      <s:element name="int" type="s:int" />
+    </s:schema>
+    <s:schema elementFormDefault="qualified">
+      <s:element name="ObtenerOrdenesDeCompraXClienteResult">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Cliente" type="TD_Cliente" />
+            <s:element minOccurs="0" maxOccurs="1" name="Ordenes" type="ArrayOfTD_Orden" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TD_Cliente">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="documentoCliente" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tipoDocumenti" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTD_Orden">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="orden" type="TD_Orden" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TD_Orden">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Encabezado" type="TD_EncOrdenCompra" />
+          <s:element minOccurs="0" maxOccurs="1" name="Producctos" type="ArrayOfTD_Producto" />
+          <s:element minOccurs="0" maxOccurs="1" name="Direcciones" type="ArrayOfTD_Direccion" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TD_EncOrdenCompra">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="numeroOrdenCompra" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fechaOrdenCompra" type="s:date" />
+          <s:element minOccurs="0" maxOccurs="1" name="estado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="numeroPedido" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fechaDespacho" type="s:date" />
+          <s:element minOccurs="0" maxOccurs="1" name="numeroFactura" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="numeroGuia" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="transportadora" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="estadoGuia" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fechaEntrega" type="s:date" />
+          <s:element minOccurs="1" maxOccurs="1" name="totalCompra" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="totalFlete" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="totalImpuesto" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTD_Producto">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="producto" type="TD_Producto" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TD_Producto">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="codigoPlu" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="codigoReferencia" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="descReferencia" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="descTalla" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="descColor" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="precio" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="cantidad" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTD_Direccion">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="direccion" type="TD_Direccion" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TD_Direccion">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Direccion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Telefono" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdPoblacion" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reservado1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reservado2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reservado3" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="OrdenesCompra">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Cliente" type="TD_Cliente" />
+            <s:element minOccurs="0" maxOccurs="1" name="Ordenes" type="ArrayOfTD_Orden" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GuardarPedidoSoapIn">
+    <wsdl:part name="parameters" element="tns:GuardarPedido" />
+  </wsdl:message>
+  <wsdl:message name="GuardarPedidoSoapOut">
+    <wsdl:part name="parameters" element="tns:GuardarPedidoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IngresarPedido_TiendaVirtualSoapIn">
+    <wsdl:part name="parameters" element="tns:IngresarPedido_TiendaVirtual" />
+  </wsdl:message>
+  <wsdl:message name="IngresarPedido_TiendaVirtualSoapOut">
+    <wsdl:part name="parameters" element="tns:IngresarPedido_TiendaVirtualResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarTarifaTransporteXPoblacionSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultarTarifaTransporteXPoblacion" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarTarifaTransporteXPoblacionSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultarTarifaTransporteXPoblacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ingresarOrdenCompraSoapIn">
+    <wsdl:part name="parameters" element="tns:ingresarOrdenCompra" />
+  </wsdl:message>
+  <wsdl:message name="ingresarOrdenCompraSoapOut">
+    <wsdl:part name="parameters" element="tns:ingresarOrdenCompraResponse" />
+  </wsdl:message>
+  <wsdl:message name="actualizarOrdenCompraSoapIn">
+    <wsdl:part name="parameters" element="tns:actualizarOrdenCompra" />
+  </wsdl:message>
+  <wsdl:message name="actualizarOrdenCompraSoapOut">
+    <wsdl:part name="parameters" element="tns:actualizarOrdenCompraResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarOrdenCompraSoapIn">
+    <wsdl:part name="parameters" element="tns:consultarOrdenCompra" />
+  </wsdl:message>
+  <wsdl:message name="consultarOrdenCompraSoapOut">
+    <wsdl:part name="parameters" element="tns:consultarOrdenCompraResponse" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarEstadoOrdenCompraSoapIn">
+    <wsdl:part name="parameters" element="tns:ActualizarEstadoOrdenCompra" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarEstadoOrdenCompraSoapOut">
+    <wsdl:part name="parameters" element="tns:ActualizarEstadoOrdenCompraResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerConsecutivoOrdenCompraSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerConsecutivoOrdenCompra" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerConsecutivoOrdenCompraSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerConsecutivoOrdenCompraResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerOrdenesDeCompraXClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerOrdenesDeCompraXCliente" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerOrdenesDeCompraXClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerOrdenesDeCompraXClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="GuardarPedidoHttpGetIn">
+    <wsdl:part name="strPedido" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GuardarPedidoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="IngresarPedido_TiendaVirtualHttpGetIn">
+    <wsdl:part name="strOrdenDeCompra" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IngresarPedido_TiendaVirtualHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarTarifaTransporteXPoblacionHttpGetIn">
+    <wsdl:part name="decMontoCompra" type="s:string" />
+    <wsdl:part name="intCodigoPoblacion" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarTarifaTransporteXPoblacionHttpGetOut">
+    <wsdl:part name="Body" element="tns:decimal" />
+  </wsdl:message>
+  <wsdl:message name="ingresarOrdenCompraHttpGetIn">
+    <wsdl:part name="nitCliente" type="s:string" />
+    <wsdl:part name="numeroOC" type="s:string" />
+    <wsdl:part name="xmlMensaje" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ingresarOrdenCompraHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="actualizarOrdenCompraHttpGetIn">
+    <wsdl:part name="nitCliente" type="s:string" />
+    <wsdl:part name="numeroOC" type="s:string" />
+    <wsdl:part name="xmlMensaje" type="s:string" />
+    <wsdl:part name="strEstado" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="actualizarOrdenCompraHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="consultarOrdenCompraHttpGetIn">
+    <wsdl:part name="numeroOC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="consultarOrdenCompraHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarEstadoOrdenCompraHttpGetIn">
+    <wsdl:part name="DocumentoCliente" type="s:string" />
+    <wsdl:part name="NumeroOrden" type="s:string" />
+    <wsdl:part name="EstadoOrden" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarEstadoOrdenCompraHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerConsecutivoOrdenCompraHttpGetIn" />
+  <wsdl:message name="ObtenerConsecutivoOrdenCompraHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerOrdenesDeCompraXClienteHttpGetIn">
+    <wsdl:part name="strDocumentoCliente" type="s:string" />
+    <wsdl:part name="strFechaInicial" type="s:string" />
+    <wsdl:part name="strFechaFinal" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerOrdenesDeCompraXClienteHttpGetOut">
+    <wsdl:part name="Body" element="OrdenesCompra" />
+  </wsdl:message>
+  <wsdl:message name="GuardarPedidoHttpPostIn">
+    <wsdl:part name="strPedido" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GuardarPedidoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="IngresarPedido_TiendaVirtualHttpPostIn">
+    <wsdl:part name="strOrdenDeCompra" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IngresarPedido_TiendaVirtualHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarTarifaTransporteXPoblacionHttpPostIn">
+    <wsdl:part name="decMontoCompra" type="s:string" />
+    <wsdl:part name="intCodigoPoblacion" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarTarifaTransporteXPoblacionHttpPostOut">
+    <wsdl:part name="Body" element="tns:decimal" />
+  </wsdl:message>
+  <wsdl:message name="ingresarOrdenCompraHttpPostIn">
+    <wsdl:part name="nitCliente" type="s:string" />
+    <wsdl:part name="numeroOC" type="s:string" />
+    <wsdl:part name="xmlMensaje" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ingresarOrdenCompraHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="actualizarOrdenCompraHttpPostIn">
+    <wsdl:part name="nitCliente" type="s:string" />
+    <wsdl:part name="numeroOC" type="s:string" />
+    <wsdl:part name="xmlMensaje" type="s:string" />
+    <wsdl:part name="strEstado" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="actualizarOrdenCompraHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="consultarOrdenCompraHttpPostIn">
+    <wsdl:part name="numeroOC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="consultarOrdenCompraHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarEstadoOrdenCompraHttpPostIn">
+    <wsdl:part name="DocumentoCliente" type="s:string" />
+    <wsdl:part name="NumeroOrden" type="s:string" />
+    <wsdl:part name="EstadoOrden" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarEstadoOrdenCompraHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerConsecutivoOrdenCompraHttpPostIn" />
+  <wsdl:message name="ObtenerConsecutivoOrdenCompraHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerOrdenesDeCompraXClienteHttpPostIn">
+    <wsdl:part name="strDocumentoCliente" type="s:string" />
+    <wsdl:part name="strFechaInicial" type="s:string" />
+    <wsdl:part name="strFechaFinal" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerOrdenesDeCompraXClienteHttpPostOut">
+    <wsdl:part name="Body" element="OrdenesCompra" />
+  </wsdl:message>
+  <wsdl:portType name="wsPedidosSoap">
+    <wsdl:operation name="GuardarPedido">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Guarda pedido enviado desde la tienda web (NC)</wsdl:documentation>
+      <wsdl:input message="tns:GuardarPedidoSoapIn" />
+      <wsdl:output message="tns:GuardarPedidoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IngresarPedido_TiendaVirtual">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Guarda pedido enviado desde la tienda virtual (OFFCORSS.COM)</wsdl:documentation>
+      <wsdl:input message="tns:IngresarPedido_TiendaVirtualSoapIn" />
+      <wsdl:output message="tns:IngresarPedido_TiendaVirtualSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarTarifaTransporteXPoblacion">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Obtiene Tarifa de Transporte por poblacion</wsdl:documentation>
+      <wsdl:input message="tns:ConsultarTarifaTransporteXPoblacionSoapIn" />
+      <wsdl:output message="tns:ConsultarTarifaTransporteXPoblacionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ingresarOrdenCompra">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ingresa el mensaje generado por la tienda virtual</wsdl:documentation>
+      <wsdl:input message="tns:ingresarOrdenCompraSoapIn" />
+      <wsdl:output message="tns:ingresarOrdenCompraSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="actualizarOrdenCompra">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Actualiza el mensaje generado por la tienda virtual</wsdl:documentation>
+      <wsdl:input message="tns:actualizarOrdenCompraSoapIn" />
+      <wsdl:output message="tns:actualizarOrdenCompraSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarOrdenCompra">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consultar el mensaje de la orden de compra generado por la tienda virtual</wsdl:documentation>
+      <wsdl:input message="tns:consultarOrdenCompraSoapIn" />
+      <wsdl:output message="tns:consultarOrdenCompraSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarEstadoOrdenCompra">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Actualiza el estado de la orden de compra.</wsdl:documentation>
+      <wsdl:input message="tns:ActualizarEstadoOrdenCompraSoapIn" />
+      <wsdl:output message="tns:ActualizarEstadoOrdenCompraSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerConsecutivoOrdenCompra">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">obtiene consecutivo orden de compra</wsdl:documentation>
+      <wsdl:input message="tns:ObtenerConsecutivoOrdenCompraSoapIn" />
+      <wsdl:output message="tns:ObtenerConsecutivoOrdenCompraSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesDeCompraXCliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">obtiene ordenes de compra de un cliente</wsdl:documentation>
+      <wsdl:input message="tns:ObtenerOrdenesDeCompraXClienteSoapIn" />
+      <wsdl:output message="tns:ObtenerOrdenesDeCompraXClienteSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="wsPedidosHttpGet">
+    <wsdl:operation name="GuardarPedido">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Guarda pedido enviado desde la tienda web (NC)</wsdl:documentation>
+      <wsdl:input message="tns:GuardarPedidoHttpGetIn" />
+      <wsdl:output message="tns:GuardarPedidoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IngresarPedido_TiendaVirtual">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Guarda pedido enviado desde la tienda virtual (OFFCORSS.COM)</wsdl:documentation>
+      <wsdl:input message="tns:IngresarPedido_TiendaVirtualHttpGetIn" />
+      <wsdl:output message="tns:IngresarPedido_TiendaVirtualHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarTarifaTransporteXPoblacion">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Obtiene Tarifa de Transporte por poblacion</wsdl:documentation>
+      <wsdl:input message="tns:ConsultarTarifaTransporteXPoblacionHttpGetIn" />
+      <wsdl:output message="tns:ConsultarTarifaTransporteXPoblacionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ingresarOrdenCompra">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ingresa el mensaje generado por la tienda virtual</wsdl:documentation>
+      <wsdl:input message="tns:ingresarOrdenCompraHttpGetIn" />
+      <wsdl:output message="tns:ingresarOrdenCompraHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="actualizarOrdenCompra">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Actualiza el mensaje generado por la tienda virtual</wsdl:documentation>
+      <wsdl:input message="tns:actualizarOrdenCompraHttpGetIn" />
+      <wsdl:output message="tns:actualizarOrdenCompraHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarOrdenCompra">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consultar el mensaje de la orden de compra generado por la tienda virtual</wsdl:documentation>
+      <wsdl:input message="tns:consultarOrdenCompraHttpGetIn" />
+      <wsdl:output message="tns:consultarOrdenCompraHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarEstadoOrdenCompra">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Actualiza el estado de la orden de compra.</wsdl:documentation>
+      <wsdl:input message="tns:ActualizarEstadoOrdenCompraHttpGetIn" />
+      <wsdl:output message="tns:ActualizarEstadoOrdenCompraHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerConsecutivoOrdenCompra">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">obtiene consecutivo orden de compra</wsdl:documentation>
+      <wsdl:input message="tns:ObtenerConsecutivoOrdenCompraHttpGetIn" />
+      <wsdl:output message="tns:ObtenerConsecutivoOrdenCompraHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesDeCompraXCliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">obtiene ordenes de compra de un cliente</wsdl:documentation>
+      <wsdl:input message="tns:ObtenerOrdenesDeCompraXClienteHttpGetIn" />
+      <wsdl:output message="tns:ObtenerOrdenesDeCompraXClienteHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="wsPedidosHttpPost">
+    <wsdl:operation name="GuardarPedido">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Guarda pedido enviado desde la tienda web (NC)</wsdl:documentation>
+      <wsdl:input message="tns:GuardarPedidoHttpPostIn" />
+      <wsdl:output message="tns:GuardarPedidoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IngresarPedido_TiendaVirtual">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Guarda pedido enviado desde la tienda virtual (OFFCORSS.COM)</wsdl:documentation>
+      <wsdl:input message="tns:IngresarPedido_TiendaVirtualHttpPostIn" />
+      <wsdl:output message="tns:IngresarPedido_TiendaVirtualHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarTarifaTransporteXPoblacion">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Obtiene Tarifa de Transporte por poblacion</wsdl:documentation>
+      <wsdl:input message="tns:ConsultarTarifaTransporteXPoblacionHttpPostIn" />
+      <wsdl:output message="tns:ConsultarTarifaTransporteXPoblacionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ingresarOrdenCompra">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ingresa el mensaje generado por la tienda virtual</wsdl:documentation>
+      <wsdl:input message="tns:ingresarOrdenCompraHttpPostIn" />
+      <wsdl:output message="tns:ingresarOrdenCompraHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="actualizarOrdenCompra">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Actualiza el mensaje generado por la tienda virtual</wsdl:documentation>
+      <wsdl:input message="tns:actualizarOrdenCompraHttpPostIn" />
+      <wsdl:output message="tns:actualizarOrdenCompraHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarOrdenCompra">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consultar el mensaje de la orden de compra generado por la tienda virtual</wsdl:documentation>
+      <wsdl:input message="tns:consultarOrdenCompraHttpPostIn" />
+      <wsdl:output message="tns:consultarOrdenCompraHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarEstadoOrdenCompra">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Actualiza el estado de la orden de compra.</wsdl:documentation>
+      <wsdl:input message="tns:ActualizarEstadoOrdenCompraHttpPostIn" />
+      <wsdl:output message="tns:ActualizarEstadoOrdenCompraHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerConsecutivoOrdenCompra">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">obtiene consecutivo orden de compra</wsdl:documentation>
+      <wsdl:input message="tns:ObtenerConsecutivoOrdenCompraHttpPostIn" />
+      <wsdl:output message="tns:ObtenerConsecutivoOrdenCompraHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesDeCompraXCliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">obtiene ordenes de compra de un cliente</wsdl:documentation>
+      <wsdl:input message="tns:ObtenerOrdenesDeCompraXClienteHttpPostIn" />
+      <wsdl:output message="tns:ObtenerOrdenesDeCompraXClienteHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="wsPedidosSoap" type="tns:wsPedidosSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GuardarPedido">
+      <soap:operation soapAction="http://tempuri.org/GuardarPedido" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IngresarPedido_TiendaVirtual">
+      <soap:operation soapAction="http://tempuri.org/IngresarPedido_TiendaVirtual" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarTarifaTransporteXPoblacion">
+      <soap:operation soapAction="http://tempuri.org/ConsultarTarifaTransporteXPoblacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ingresarOrdenCompra">
+      <soap:operation soapAction="http://tempuri.org/ingresarOrdenCompra" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarOrdenCompra">
+      <soap:operation soapAction="http://tempuri.org/actualizarOrdenCompra" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarOrdenCompra">
+      <soap:operation soapAction="http://tempuri.org/consultarOrdenCompra" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarEstadoOrdenCompra">
+      <soap:operation soapAction="http://tempuri.org/ActualizarEstadoOrdenCompra" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerConsecutivoOrdenCompra">
+      <soap:operation soapAction="http://tempuri.org/ObtenerConsecutivoOrdenCompra" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesDeCompraXCliente">
+      <soap:operation soapAction="http://tempuri.org/ObtenerOrdenesDeCompraXCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="wsPedidosSoap12" type="tns:wsPedidosSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GuardarPedido">
+      <soap12:operation soapAction="http://tempuri.org/GuardarPedido" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IngresarPedido_TiendaVirtual">
+      <soap12:operation soapAction="http://tempuri.org/IngresarPedido_TiendaVirtual" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarTarifaTransporteXPoblacion">
+      <soap12:operation soapAction="http://tempuri.org/ConsultarTarifaTransporteXPoblacion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ingresarOrdenCompra">
+      <soap12:operation soapAction="http://tempuri.org/ingresarOrdenCompra" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarOrdenCompra">
+      <soap12:operation soapAction="http://tempuri.org/actualizarOrdenCompra" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarOrdenCompra">
+      <soap12:operation soapAction="http://tempuri.org/consultarOrdenCompra" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarEstadoOrdenCompra">
+      <soap12:operation soapAction="http://tempuri.org/ActualizarEstadoOrdenCompra" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerConsecutivoOrdenCompra">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerConsecutivoOrdenCompra" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesDeCompraXCliente">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerOrdenesDeCompraXCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="wsPedidosHttpGet" type="tns:wsPedidosHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GuardarPedido">
+      <http:operation location="/GuardarPedido" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IngresarPedido_TiendaVirtual">
+      <http:operation location="/IngresarPedido_TiendaVirtual" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarTarifaTransporteXPoblacion">
+      <http:operation location="/ConsultarTarifaTransporteXPoblacion" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ingresarOrdenCompra">
+      <http:operation location="/ingresarOrdenCompra" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarOrdenCompra">
+      <http:operation location="/actualizarOrdenCompra" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarOrdenCompra">
+      <http:operation location="/consultarOrdenCompra" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarEstadoOrdenCompra">
+      <http:operation location="/ActualizarEstadoOrdenCompra" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerConsecutivoOrdenCompra">
+      <http:operation location="/ObtenerConsecutivoOrdenCompra" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesDeCompraXCliente">
+      <http:operation location="/ObtenerOrdenesDeCompraXCliente" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="wsPedidosHttpPost" type="tns:wsPedidosHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GuardarPedido">
+      <http:operation location="/GuardarPedido" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IngresarPedido_TiendaVirtual">
+      <http:operation location="/IngresarPedido_TiendaVirtual" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarTarifaTransporteXPoblacion">
+      <http:operation location="/ConsultarTarifaTransporteXPoblacion" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ingresarOrdenCompra">
+      <http:operation location="/ingresarOrdenCompra" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarOrdenCompra">
+      <http:operation location="/actualizarOrdenCompra" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarOrdenCompra">
+      <http:operation location="/consultarOrdenCompra" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarEstadoOrdenCompra">
+      <http:operation location="/ActualizarEstadoOrdenCompra" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerConsecutivoOrdenCompra">
+      <http:operation location="/ObtenerConsecutivoOrdenCompra" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesDeCompraXCliente">
+      <http:operation location="/ObtenerOrdenesDeCompraXCliente" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wsPedidos">
+    <wsdl:port name="wsPedidosSoap" binding="tns:wsPedidosSoap">
+      <soap:address location="http://intrasvr.hermeco.com/web/wsPedidos/wsPedidos.asmx" />
+    </wsdl:port>
+    <wsdl:port name="wsPedidosSoap12" binding="tns:wsPedidosSoap12">
+      <soap12:address location="http://intrasvr.hermeco.com/web/wsPedidos/wsPedidos.asmx" />
+    </wsdl:port>
+    <wsdl:port name="wsPedidosHttpGet" binding="tns:wsPedidosHttpGet">
+      <http:address location="http://intrasvr.hermeco.com/web/wsPedidos/wsPedidos.asmx" />
+    </wsdl:port>
+    <wsdl:port name="wsPedidosHttpPost" binding="tns:wsPedidosHttpPost">
+      <http:address location="http://intrasvr.hermeco.com/web/wsPedidos/wsPedidos.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

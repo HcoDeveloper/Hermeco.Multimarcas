@@ -1,77 +1,101 @@
 ﻿<div class="row">
     <div class="col-sm-12 col-lg-12">
-        <!-- Page Content -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="pedido-titulos">
-                    <div class="col-md-2">
-                        <label>Color</label>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="col-md-3"><label>Descripcion</label></div>
-                        <div class="col-md-3"><label>Talla</label></div>
-                        <div class="col-md-3"><label>Cantidad</label></div>
-                        <div class="col-md-3"><label>Stock</label></div>
-                    </div>
-                    <div class="col-md-2">
-                        <label>Total</label>
-                    </div>
+        @*<!-- Page Content -->*@
+        <div class="row" ng-switch="hasCartItems">
+            <div class="pedido" ng-switch-when="true">
+                <div class="col-md-12">
+                    <div class="pedido-titulos">
+                        <div class="col-md-2">
+                            <label>Color</label>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="col-md-3"><label>Descripcion</label></div>
+                            <div class="col-md-3"><label>Talla</label></div>
+                            <div class="col-md-3"><label>Cantidad</label></div>
+                            <div class="col-md-3"><label>Stock</label></div>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Total</label>
+                        </div>
 
-                </div>
-                <div class="alert alert-warning">
-                    Mensaje de Error!!!
-                </div>
-                <div class="productos-pedido">
-
-                    <div class="producto-pedido" ng-repeat="referencia in refPedido">
-                        <div class="col-md-12" ng-repeat="color in referencia.Colores">
-                            <div class="col-md-12">
-                                <div class="col-md-2">
-                                    <div class="pedido-imagen" ng-repeat="Imagen in referencia.Imagenes | filter:{DescripcionColor: color} ">
-                                        <img class="img-responsive center" data-ng-src="data:image/JPEG;base64,{{Imagen.Imagen}}" />
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div><label>{{referencia.Plu[0].Descripcion}}</label></div>
-                                    <label>Ref: </label> {{referencia.IdReferencia}} - {{referencia.IdOferta}}
-                                    <div><label>Precio: </label> $ {{formatNumber(referencia.Plu[0].Precio)}}</div>
-                                    <div><label>Oferta: </label> $ {{formatNumber(referencia.Plu[0].Precio)}}</div>
-                                    <div><label>Color: </label> {{color}}</div>
-                                    <a href="" target="_self" data-target="#info-producto" data-toggle="modal" ng-click="loadReferencia(referencia.IdOferta, referencia.IdReferencia)">Editar</a><span> | </span><a href="" target="_self">Eliminar</a>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="col-md-12" ng-repeat="plu in referencia.Plu | filter: {Color: color }">
-                                        <div class="col-md-4">{{plu.Talla}}</div>
-                                        <div class="col-md-4">
-                                            <a href="" target="_self" ng-click="decrementar(plu.Codigo)">
-                                                <span class="glyphicon glyphicon-minus"></span>
-                                            </a>
-                                            <input id="Id{{plu.Codigo}}" name="Id" type="hidden" value="{{plu.Id}}" />
-                                            <input id="itemId{{plu.Codigo}}" name="itemid" type="hidden" value="{{plu.Codigo}}" />
-                                            <input id="stock{{plu.Codigo}}" name="stock" type="hidden" value="{{plu.stock}}" />
-                                            <input id="cantidad{{plu.Codigo}}" name="cantidad" type="text" value="{{plu.Cantidad}}" maxlength="4" size="4" ng-keypress="validarNumero($event, plu.Codigo)" />
-                                            <a href="" target="_self" ng-click="incrementar(plu.Codigo)">
-                                                <span class="glyphicon glyphicon-plus"></span>
-                                            </a>
-                                            <span ng-if="plu.Cantidad > plu.stock" class="glyphicon glyphicon-remove" style="color:red"></span>
-                                            <span ng-if="plu.Cantidad <= plu.stock" class="glyphicon glyphicon-ok" style="color:green"></span>
-
+                    </div>
+                    <div class="alert alert-warning">
+                        Mensaje de Error!!!
+                    </div>
+                    <div class="productos-pedido">
+                        <div class="producto-pedido" ng-repeat="referencia in refPedido">
+                            <div class="col-md-12" ng-repeat="color in referencia.Colores">
+                                <div class="col-md-12">
+                                    <div class="col-md-2">
+                                        <div class="pedido-imagen" ng-repeat="Imagen in referencia.Imagenes | filter:{DescripcionColor: color} ">
+                                            <img class="img-responsive center" data-ng-src="data:image/JPEG;base64,{{Imagen.Imagen}}" />
                                         </div>
-                                        <div class="col-md-4">{{plu.stock}}</div>
                                     </div>
+                                    <div class="col-md-2">
+                                        <div><label>{{referencia.Plu[0].Descripcion}}</label></div>
+                                        <label>Ref: </label> {{referencia.IdReferencia}} - {{referencia.IdOferta}}
+                                        <div><label>Precio: </label> $ {{formatNumber(referencia.Plu[0].Precio)}}</div>
+                                        <div><label>Oferta: </label> $ {{formatNumber(referencia.Plu[0].Precio)}}</div>
+                                        <div><label>Color: </label> {{color}}</div>
+                                        <a href="" target="_self" data-target="#info-producto" data-toggle="modal" ng-click="loadReferencia(referencia.IdOferta, referencia.IdReferencia)">Editar</a><span> | </span><a href="" target="_self">Eliminar</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-12" ng-repeat="plu in referencia.Plu | filter: {Color: color }">
+                                            <div class="col-md-4">{{plu.Talla}}</div>
+                                            <div class="col-md-4">
+                                                <a href="" target="_self" ng-click="decrementar(plu.Codigo)">
+                                                    <span class="glyphicon glyphicon-minus"></span>
+                                                </a>
+                                                <input id="Id{{plu.Codigo}}" name="Id" type="hidden" value="{{plu.Id}}" />
+                                                <input id="itemId{{plu.Codigo}}" name="itemid" type="hidden" value="{{plu.Codigo}}" />
+                                                <input id="stock{{plu.Codigo}}" name="stock" type="hidden" value="{{plu.stock}}" />
+                                                <input id="cantidad{{plu.Codigo}}" name="cantidad" type="text" value="{{plu.Cantidad}}" maxlength="4" size="4" ng-keypress="validarNumero($event, plu.Codigo)" />
+                                                <a href="" target="_self" ng-click="incrementar(plu.Codigo)">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </a>
+                                                <span ng-if="plu.Cantidad > plu.stock" class="glyphicon glyphicon-remove" style="color:red"></span>
+                                                <span ng-if="plu.Cantidad <= plu.stock" class="glyphicon glyphicon-ok" style="color:green"></span>
+
+                                            </div>
+                                            <div class="col-md-4">{{plu.stock}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">$ {{formatNumber(referencia.Plu[0].Precio * GetSummGroup(referencia.Plu)) | filter: {Plu.Color: color} }}</div>
                                 </div>
-                                <div class="col-md-2">$ {{formatNumber(referencia.Plu[0].Precio * GetSummGroup(referencia.Plu)) | filter: {Plu.Color: color} }}</div>
+                                <span style="margin-top:2px;">&nbsp;</span>
+                                <hr style="color:black; background-color:black; width:75%;" />
                             </div>
-                            <span style="margin-top:2px;">&nbsp;</span>
-                            <hr style="color:black; background-color:black; width:75%;" />
                         </div>
                     </div>
                 </div>
+                <div style="float:right; margin-right:3%">
+                    <input type="checkbox" />
+                    <a herf="" target="_self" data-toggle="modal" data-target="#terminos">Acepto los Términos y Condiciones de Uso.</a>
+
+                    <button type="button" class="btn btn-primary" ng-click="procesarPedido();">Procesar Pedido</button>
+                </div>
             </div>
-            <div style="float:right; margin-right:3%">
-                <button type="button" class="btn btn-primary">Procesar Pedido</button>
+            <div class="mensaje"  ng-switch-when="false">
+                <span class="glyphicon glyphicon-shopping-carts"></span>
+                <h4>Tu carrito esta vacío</h4>
+                <a href="@Url.Content("~/")Ofertas" class="btn btn-default">Ver Ofertas</a>
             </div>
         </div>
+        <div class="modal modal-wide fade" id="terminos" role="dialog">
+            <div class="modal-dialog" role="dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Términos y Condiciones de Uso</h4>
+                    </div>
+                    <div class="modal-body" style="max-height:400px;">
+                        <div ng-include="'@Url.Content("~/Content/terminos.html")'"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
         <div id="info-producto" class="modal modal-wide fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">

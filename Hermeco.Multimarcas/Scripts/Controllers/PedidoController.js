@@ -3,6 +3,11 @@
     $http.get(apiBaseUrl + '/pedido')
        .then(function (response) {
            $scope.refPedido = response.data;
+           if (response.data.length === 0) {
+               $scope.hasCartItems = false;
+           } else {
+               $scope.hasCartItems = true;
+           }
        });
 
     $scope.GetSummGroup = function (group) {
@@ -77,6 +82,15 @@
                 $scope.refdetail = data;
             });
     }
+
+    $scope.procesarPedido = function () {
+        $http.post(apiBaseUrl + '/OrdenCompra')
+            .success(function (data, status, headers) {
+                $scope.resultado = data;
+            });
+    }
+
 }]
 
 PedidoController.$inject = ['$scope', '$http', '$routeParams'];
+

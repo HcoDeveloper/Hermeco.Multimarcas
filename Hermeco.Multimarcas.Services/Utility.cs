@@ -11,6 +11,10 @@ using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.ComponentModel;
 using System.Globalization;
+using System.Data;
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
+using System.Data.Common;
 
 namespace Hermeco.Multimarcas.Services
 {

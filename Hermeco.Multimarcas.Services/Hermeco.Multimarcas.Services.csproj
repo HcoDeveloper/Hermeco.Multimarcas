@@ -45,8 +45,10 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
@@ -85,6 +87,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ReferenciaService.cs" />
+    <Compile Include="Service References\HPedidos\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\Proxy\Reference.cs" />
     <Compile Include="Service References\Proxy\Reference1.cs">
       <AutoGen>True</AutoGen>
@@ -106,6 +113,13 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Service References\HPedidos\Hermeco.Multimarcas.Services.HPedidos.ObtenerOrdenesDeCompraXClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\HPedidos\Hermeco.Multimarcas.Services.HPedidos.ObtenerOrdenesDeCompraXClienteResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\HPedidos\wsPedidos.wsdl" />
     <None Include="Service References\Proxy\AviableReports.wsdl" />
     <None Include="Web References\wsPedidos\ConfirmaPed.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -117,6 +131,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\HPedidos\configuration91.svcinfo" />
+    <None Include="Service References\HPedidos\configuration.svcinfo" />
+    <None Include="Service References\HPedidos\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Service References\Proxy\configuration.svcinfo" />
     <Content Include="Service References\Proxy\configuration91.svcinfo" />
     <Content Include="Service References\Proxy\Reference.svcmap">
@@ -142,6 +162,9 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Hermeco_Multimarcas_Services_wsPedidos_CreaPedido_Sync_OutService</CachedSettingsPropName>
     </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\HPedidos\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

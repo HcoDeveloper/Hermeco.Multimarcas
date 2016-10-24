@@ -87,6 +87,7 @@
         <div class="footer-page">
             <span class="glyphicon glyphicon-envelope"></span> OFFCORSS es una marca de C.I. Hermeco S.A. PBX. +54(4)3847100 - Fax. +57(4) 262 0803 A.A. 50945 - Medellin, Colombia
         </div>
+        <a href="#" class="back-to-top">Back to Top</a>
     </div>
     @Styles.Render("~/Content/css")
     <!-- jQuery library -->
@@ -100,6 +101,24 @@
     <![endif]-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.js"></script>
+    <script type="text/javascript">
+        var amountScrolled = 300;
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > amountScrolled) {
+                $('a.back-to-top').fadeIn('slow');
+            } else {
+                $('a.back-to-top').fadeOut('slow');
+            }
+        });
+
+        $('a.back-to-top').click(function () {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 700);
+            return false;
+        });
+    </script>
     @Scripts.Render("~/bundles/angularjs")
 </body>
 </html>

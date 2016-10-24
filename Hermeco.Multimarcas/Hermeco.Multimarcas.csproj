@@ -181,6 +181,7 @@
     <Compile Include="Controllers\Api\CatalogoController.cs" />
     <Compile Include="Controllers\Api\ItemPedido.cs" />
     <Compile Include="Controllers\Api\ItemPedidoController.cs" />
+    <Compile Include="Controllers\Api\OrdenCompraController.cs" />
     <Compile Include="Controllers\Api\PedidoController.cs" />
     <Compile Include="Controllers\Api\ReferenciaController.cs" />
     <Compile Include="Controllers\Security.cs" />
@@ -207,6 +208,7 @@
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\pass-icon.png" />
     <Content Include="Content\images\user-icon.png" />
+    <Content Include="Content\terminos.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-endless-scroll.min.js" />
@@ -250,6 +252,7 @@
     <None Include="Properties\PublishProfiles\Pruebassvr.pubxml" />
     <Content Include="Views\Home\Pedido.cshtml" />
     <Content Include="Views\Account\Logout.cshtml" />
+    <Content Include="Views\Home\TerminosContrato.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hermeco.Multimarcas.Services\Hermeco.Multimarcas.Services.csproj">

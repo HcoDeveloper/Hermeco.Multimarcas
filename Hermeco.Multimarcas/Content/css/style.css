@@ -213,6 +213,7 @@ portafolio * {
 }
 
 .tarjeta-producto {
+    text-align:center;
     background-color: #fff;
     border-radius: 5px;
     margin: 2%;
@@ -566,4 +567,21 @@ table tr td {
 
         -webkit-transition: all 0.3s 1s ease-out;  
                 transition: all 0.3s 1s ease-out;
+    }
+
+    a.back-to-top {
+	    display: none;
+	    width: 40px;
+	    height: 40px;
+	    
+	    position: fixed;
+	    z-index: 999;
+	    right: 0px;
+	    bottom: 35%;
+	    background: #FFD100 url("up-arrow.png") no-repeat center 43%;
+    }
+
+    .mensaje {
+        margin-top: 80px;
+        margin-left: 10px;
     }

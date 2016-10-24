@@ -41,7 +41,7 @@ function AgregarItem() {
             var color = col.getElementsByTagName("input")[5];
             var cantidad = col.getElementsByTagName("input")[6];
 
-            if (plu != undefined || cantidad != undefined) {
+            if (plu != undefined && cantidad != undefined) {
 
                 item = {}
                 item["Id"] = id.value;
@@ -68,9 +68,8 @@ function AgregarItem() {
         data: JSON.stringify(jsonObj),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json'
-    }).done(function () {
-        console.log("Success");
-        angular.element(document.getElementById('offcorssApp')).scope().reload();
+    }).done(function (response) {
+        console.log(response);
     });
 
 }

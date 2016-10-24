@@ -37,15 +37,17 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-4 col-lg-3" endless-scroll="referencia in referencias | filter:fMundo">
                         <div class="tarjeta-producto">
-                            <div class="imagen-producto img-responsive">
-                                <img class="img-responsive center" data-ng-src="data:image/JPEG;base64,{{referencia.Imagenes[0].Imagen}}" />
-                            </div>
-                            <div class="info-producto">
-                                <p>{{referencia.Plu[0].Descripcion}}</p>
-                                <p>{{referencia.Plu[0].Precio | currency}}</p>
-                                <p>{{referencia.Plu[0].Precio | currency}}</p>
-                            </div>
-                            <button class="btn btn-block" data-target="#info-producto" data-toggle="modal" ng-click="loadReferencia(referencia.IdOferta, referencia.IdReferencia)">Agregar</button>
+                            <a href="" target="_self" data-target="#info-producto" data-toggle="modal" ng-click="loadReferencia(referencia.IdOferta, referencia.IdReferencia)">
+                                <div class="imagen-producto img-responsive">
+                                    <img class="img-responsive center" data-ng-src="data:image/JPEG;base64,{{referencia.Imagenes[0].Imagen}}" />
+                                </div>
+                                <div><span>Ver +</span></div>
+                                <div class="info-producto">
+                                    <p>{{referencia.Plu[0].Descripcion | capitalize}}</p>
+                                    <p>{{referencia.Plu[0].Precio | currency}}</p>
+                                    <p>{{referencia.Plu[0].Precio | currency}}</p>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>

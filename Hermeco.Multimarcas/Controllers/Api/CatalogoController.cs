@@ -25,18 +25,28 @@ namespace Hermeco.Multimarcas.Controllers.Api
         public HttpResponseMessage Get()
         {
             var Session = HttpContext.Current.Session;
-            string Nit = Session["UserNit"].ToString();
-            int id = System.Convert.ToInt32( HttpContext.Current.Request.QueryString["oferta"]);
-            var page = System.Convert.ToInt32(HttpContext.Current.Request.QueryString["page"]);
-
-            ReferenciaService rs = new ReferenciaService();
-            var referencias = rs.GetReferenciasByOferta(Nit ,id, System.Convert.ToInt32(page), true, false);
-
-            HttpContext.Current.Response.AppendHeader("pages", rs.GetPagesLastQuery().ToString());
             HttpResponseMessage msg = new HttpResponseMessage();
-            msg.Content = new ObjectContent<object>(referencias, new System.Net.Http.Formatting.JsonMediaTypeFormatter());
-            msg.StatusCode = HttpStatusCode.OK;
-            return msg;
+            if (Session["UserNit"] != null)
+            {
+                string Nit = Session["UserNit"].ToString();
+                int id = System.Convert.ToInt32(HttpContext.Current.Request.QueryString["oferta"]);
+                var page = System.Convert.ToInt32(HttpContext.Current.Request.QueryString["page"]);
+
+                ReferenciaService rs = new ReferenciaService();
+                var referencias = rs.GetReferenciasByOferta(Nit, id, System.Convert.ToInt32(page), true, false);
+
+                HttpContext.Current.Response.AppendHeader("pages", rs.GetPagesLastQuery().ToString());
+                msg = new HttpResponseMessage();
+                msg.Content = new ObjectContent<object>(referencias, new System.Net.Http.Formatting.JsonMediaTypeFormatter());
+                msg.StatusCode = HttpStatusCode.OK;
+                return msg;
+            }
+            else
+            {
+                msg.Content = new ObjectContent<object>("La sesión ha sido finalizada por inactividad", new System.Net.Http.Formatting.JsonMediaTypeFormatter());
+                msg.StatusCode = HttpStatusCode.Gone;
+                return msg;
+            }
          }
     }
 }

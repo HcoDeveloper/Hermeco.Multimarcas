@@ -245,15 +245,18 @@ namespace Hermeco.Multimarcas.Services
                 plu.ValorComposicion = dr["VALORCOMPOSICION"] == DBNull.Value ? "":  dr["VALORCOMPOSICION"].ToString();
                 plu.Mundo = Utility.GetMundo(plu.Genero, plu.Edad);
                 referencia.Plu.Add(plu);
-                if (!referencia.Colores.Contains(dr["COLOR"].ToString()))
-                {
-                    referencia.Colores.Add(dr["COLOR"].ToString());
-                }
+                
 
                 if (!referencia.Tallas.Contains(dr["CODIGOTALLA"].ToString()))
                 {
                     referencia.Tallas.Add(dr["CODIGOTALLA"].ToString());
                 }
+
+                if (!referencia.Colores.Contains(dr["COLOR"].ToString()))
+                {
+                    referencia.Colores.Add(dr["COLOR"].ToString());
+                }
+
             }
         }
 
@@ -265,6 +268,7 @@ namespace Hermeco.Multimarcas.Services
             var connectionString = ConfigurationManager.ConnectionStrings["dbComercial"].ConnectionString;
             using (var session = SessionManager.OpenSession(connectionString))
             {
+                List<string> Colores = new List<string>();
                 List<ImagenesReferenciaEntity> imagenes = null;
                 if (juegoCompleto) {
                     imagenes = (from i in session.Query<ImagenesReferenciaEntity>()
@@ -283,6 +287,13 @@ namespace Hermeco.Multimarcas.Services
 
                 foreach (ImagenesReferenciaEntity imagen in imagenes)
                 {
+                    if (referencia.Colores.Contains(imagen.DescripcionColor))
+                    {
+                        if (!Colores.Contains(imagen.DescripcionColor))
+                        {
+                            Colores.Add(imagen.DescripcionColor);
+                        }
+                    }
                     referencia.Imagenes.Add(new Imagenes
                     {
                         Clasificacion = imagen.Clasificacion,
@@ -296,8 +307,9 @@ namespace Hermeco.Multimarcas.Services
                         //Imagen = juegoCompleto? imagen.Imagen : Utility.resizeImage( imagen.Imagen, 300, 300),
                         Imagen = Utility.resizeImage(imagen.Imagen, 300, 300),
                         Orden = imagen.Orden
-                    });
+                    });             
                 }
+                referencia.Colores = Colores;
             }
         }
     }

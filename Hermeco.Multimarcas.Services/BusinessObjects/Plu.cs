@@ -10,7 +10,7 @@ namespace Hermeco.Multimarcas.Services.BusinessObjects
         public string Codigo { get; set; }
         public string Talla { get; set; }
         public string Color { get; set; }
-        public float Precio { get; set; }
+        public decimal Precio { get; set; }
         public string Descripcion { get; set; }
         public string GrupoArticuloExt { get; set; }
         public string DenomGrupoArtiulo { get; set; }
