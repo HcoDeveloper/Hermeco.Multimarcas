@@ -130,7 +130,31 @@ namespace Hermeco.Multimarcas.Services
             }
             return referencia;
         }
-        
+
+        public Referencia GetReferencia(String Nit, String RefId, Boolean loadImages = false, Boolean juegoCompletoImagenes = true)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["dbComercial"].ConnectionString;
+            Referencia referencia = null;
+            using (var session = SessionManager.OpenSession(connectionString))
+            {
+                var referenciaEntity = (from r in session.Query<ReferenciaOfertasEntity>()
+                                        join co in session.Query<ClienteOfertaEntity>() on r.IdOferta equals co.IdOferta
+                                        join o in session.Query<OfertaEntity>() on co.IdOferta equals o.Id
+                                        where r.IdReferencia.Equals(RefId)  && r.Activa.Equals(true) &&
+                                        co.IdCliente.Trim().Equals(Nit.Trim())
+                                        && DateTime.Now >= o.FechaPublicacion && DateTime.Now <= o.FechaVencimiento
+                                        orderby r.IdReferencia
+                                        select r).Single();
+                referencia = fillReferencia(referenciaEntity);
+                fillPlu(ref referencia);
+                if (loadImages)
+                {
+                    fillImages(ref referencia, juegoCompletoImagenes);
+                }
+            }
+            return referencia;
+        }
+
         private Referencia fillReferencia(ReferenciaOfertasEntity RefEntity ){
             Referencia refe = new Referencia
             {

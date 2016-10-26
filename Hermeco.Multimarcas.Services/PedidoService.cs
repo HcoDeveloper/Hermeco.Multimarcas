@@ -85,6 +85,31 @@ namespace Hermeco.Multimarcas.Services
             return 1;
         }
 
+        public Boolean RemoveItem(string nit, string referencia, string color)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["dbComercial"].ConnectionString;
+            try
+            {
+                using (var session = SessionManager.OpenSession(connectionString))
+                {
+                    var cartItems = (from c in session.Query<CartItemEntity>()
+                                 where c.Color.Equals(color) && c.Referencia.Equals(referencia) && c.Nit.Equals(nit)
+                                 orderby c.Referencia, c.Plu
+                                 select c).ToList();
+                    foreach (var cartItem in cartItems)
+                    {
+                        session.Delete(cartItem);
+                    }
+                    session.Flush();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
         public List<Referencia> GetCartItemsByNit(string Nit)
         {
             List<Referencia> referencias = new List<Referencia>();

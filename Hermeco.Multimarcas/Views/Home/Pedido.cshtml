@@ -17,10 +17,6 @@
                         <div class="col-md-2">
                             <label>Total</label>
                         </div>
-
-                    </div>
-                    <div class="alert alert-warning">
-                        Mensaje de Error!!!
                     </div>
                     <div class="productos-pedido">
                         <div class="producto-pedido" ng-repeat="referencia in refPedido">
@@ -37,7 +33,8 @@
                                         <div><label>Precio: </label> $ {{formatNumber(referencia.Plu[0].Precio)}}</div>
                                         <div><label>Oferta: </label> $ {{formatNumber(referencia.Plu[0].Precio)}}</div>
                                         <div><label>Color: </label> {{color}}</div>
-                                        <a href="" target="_self" data-target="#info-producto" data-toggle="modal" ng-click="loadReferencia(referencia.IdOferta, referencia.IdReferencia)">Editar</a><span> | </span><a href="" target="_self">Eliminar</a>
+                                        <a href="" target="_self" data-target="#info-producto" data-toggle="modal" ng-click="loadReferencia(referencia.IdOferta, referencia.IdReferencia)">Editar</a><span> | </span>
+                                        <a href="" target="_self" ng-click="eliminar(referencia.IdReferencia, color)">Eliminar</a>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="col-md-12" ng-repeat="plu in referencia.Plu | filter: {Color: color }">

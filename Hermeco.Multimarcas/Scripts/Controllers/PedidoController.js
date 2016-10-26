@@ -83,12 +83,28 @@
             });
     }
 
+    $scope.eliminar = function (refeid, color) {
+        $http.delete(apiBaseUrl + '/Pedido/?&referencia=' + refeid + "&color=" + color)
+            .success(function (data, status, headers) {
+                $scope.refdetail = data;
+            });
+    }
+
+
     $scope.procesarPedido = function () {
         $http.post(apiBaseUrl + '/OrdenCompra')
             .success(function (data, status, headers) {
                 $scope.resultado = data;
             });
     }
+
+    $scope.addAlert = function (message) {
+        $scope.alerts.push({ msg: message});
+    };
+
+    $scope.closeAlert = function (index) {
+        $scope.alerts.splice(index, 1);
+    };
 
 }]
 

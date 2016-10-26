@@ -22,7 +22,7 @@ namespace Hermeco.Multimarcas.Services
                 var ofertasEntity = (from o in session.Query<OfertaEntity>()
                                join co in session.Query<ClienteOfertaEntity>() on
                                  o.Id equals co.IdOferta
-                               where co.IdCliente.Contains(Nit)
+                               where co.IdCliente.Trim().Equals(Nit.Trim())
                                && DateTime.Now >= o.FechaPublicacion && DateTime.Now <= o.FechaVencimiento
                                select o).ToList();
                 foreach (OfertaEntity ofertaEntity in ofertasEntity)

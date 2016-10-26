@@ -213,6 +213,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-endless-scroll.min.js" />
     <Content Include="Scripts\CartUtil.js" />
+    <Content Include="Scripts\Controllers\BusquedaController.js" />
     <Content Include="Scripts\Controllers\CatalogoController.js" />
     <Content Include="Scripts\Controllers\OfertaController.js" />
     <Content Include="Scripts\Controllers\PedidoController.js" />
@@ -253,6 +254,7 @@
     <Content Include="Views\Home\Pedido.cshtml" />
     <Content Include="Views\Account\Logout.cshtml" />
     <Content Include="Views\Home\TerminosContrato.cshtml" />
+    <Content Include="Views\Home\Busqueda.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hermeco.Multimarcas.Services\Hermeco.Multimarcas.Services.csproj">

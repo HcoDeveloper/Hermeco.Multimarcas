@@ -32,7 +32,7 @@ namespace Hermeco.Multimarcas.Services
             }
 
             
-            DataSet carteraCliente = cs.ObtenerCarteraCustomerService(cliente.Codigo);
+            DataSet carteraCliente = cs.ObtenerCarteraCustomerService("'"+cliente.Codigo+"'");
             if (carteraCliente != null)
             {
                 if (carteraCliente.Tables[0].Rows.Count > 0)

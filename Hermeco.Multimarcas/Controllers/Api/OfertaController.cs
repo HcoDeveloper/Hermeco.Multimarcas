@@ -20,7 +20,7 @@ namespace Hermeco.Multimarcas.Controllers
             var Session = HttpContext.Current.Session;
             string id = (string)Session["UserNit"];
             int idOferta = 0;
-            if (HttpContext.Current.Request.QueryString["oferta"].ToString() != "undefined")
+            if (HttpContext.Current.Request.QueryString["oferta"] != null && HttpContext.Current.Request.QueryString["oferta"].ToString() != "undefined")
             {
                 idOferta = System.Convert.ToInt32(HttpContext.Current.Request.QueryString["oferta"]);
             }

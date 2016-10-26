@@ -1,0 +1,210 @@
+﻿<div id="loader-wrapper">
+    <div id="loader"></div>
+
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+
+</div>
+<div class="container-fluid">
+    <input type="hidden" ng-model="page" />
+    <div class="row">
+        <div class="catalogo">
+            <div class="col-sm-3 col-lg-2 left-panel">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel-group" ng-repeat="oferta in ofertas">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="@Url.Content("~/")Catalogo/{{oferta.Id}}">{{oferta.Nombre}}</a>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div id="portafolios{{$index}}" class="panel-collapse" ng-class="{'collapse': oferta.Id != ofertaActiva}">
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item active"><a href="@Url.Content("~/")Catalogo/{{oferta.Id}}">Todos</a></li>
+                                        <li class="list-group-item active" ng-repeat="mundo in oferta.Mundos" ><a href="" target="_self">{{mundo.Nombre}}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9 col-lg-10">
+                <!-- Page Content -->
+                <div class="row">
+                    <div class="col-xs-12 col-md-4 col-lg-3" endless-scroll="referencia in referencias | filter:fMundo">
+                        <div class="tarjeta-producto">
+                            <a href="" target="_self" data-target="#info-producto" data-toggle="modal" ng-click="loadReferencia(referencia.IdOferta, referencia.IdReferencia)">
+                                <div class="imagen-producto img-responsive">
+                                    <img class="img-responsive center" data-ng-src="data:image/JPEG;base64,{{referencia.Imagenes[0].Imagen}}" />
+                                </div>
+                                <div><span>Ver +</span></div>
+                                <div class="info-producto">
+                                    <p>{{referencia.Plu[0].Descripcion | capitalize}}</p>
+                                    <p>{{referencia.Plu[0].Precio | currency}}</p>
+                                    <p>{{referencia.Plu[0].Precio | currency}}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="cartera" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Mi Cartera</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Cupo de Crédito: {{infoCliente.CupoCredito}} </p>
+                                <p>Cartera: {{infoCliente.Cartera}}</p>
+                                <p>Cupo Disponible: {{infoCliente.CupoDisponible}}</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-defaul" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Info Producto -->
+                <div id="info-producto" class="modal modal-wide fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Referencia - {{refdetail.IdReferencia}}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4 col-lg-6">
+                                        <!-- Carrusel de productos -->
+                                        <div id="cProductos" class="carousel slide" data-ride="carousel" data-interval="false">
+                                            <div class="carousel-inner" role="listbox">
+                                                <ol class="carousel-indicators">
+                                                    <li data-target="#cProductos" data-slide-to="{{Imagenes.Orden}}" ng-repeat="Imagenes in refdetail.Imagenes">
+                                                    </li>
+                                                </ol>
+                                                <div class="item" ng-class="{'active':$first}" ng-repeat="Imagenes in refdetail.Imagenes">
+                                                    <img class="img-responsive center" data-ng-src="data:image/JPEG;base64,{{Imagenes.Imagen}}" style=" display: block; max-height:500px; width: auto; height: auto;" />
+                                                </div>
+                                            </div>
+                                            <!-- Left and right controls -->
+                                            <a class="left carousel-control" href="#cProductos" role="button" data-slide="prev" target="_self">
+                                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                                <span class="sr-only">Anterior</span>
+                                            </a>
+                                            <a class="right carousel-control" href="#cProductos" role="button" data-slide="next" target="_self">
+                                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                                <span class="sr-only">Siguiente</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-8 col-lg-6">
+                                        <div>
+                                            <div class="info-referencia">
+                                                <h3>{{refdetail.Plu[0].Descripcion}}</h3>
+                                                <div>
+                                                    <label>Codigo:</label>{{refdetail.IdReferencia}}
+                                                </div>
+                                                <div>
+                                                    <label>Tipo Diseño:</label>{{refdetail.Plu[0].ConcDiseno}}
+                                                </div>
+                                                <div>
+                                                    <label>Colores:</label><span ng-repeat="color in refdetail.Colores">{{color}}&nbsp;</span>
+                                                </div>
+                                                <div>
+                                                    <label>Tallas:</label><span ng-repeat="talla in refdetail.Tallas">{{talla}}&nbsp;</span>
+                                                </div>
+                                                <div>
+                                                    <label>Precio:</label><span class="precio-referencia">{{refdetail.Plu[0].Precio | currency}}</span>
+                                                </div>
+                                                <div>
+                                                    <label>Precio Oferta:</label>{{refdetail.Plu[0].Precio | currency}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-lg-12">
+                                        <div class="bloque_separado center">
+                                            <div class="separador corto">
+                                                <div class="linea_separador"></div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <table id="ItemPedido">
+                                                <tr>
+                                                    <td colspan="3"></td>
+                                                    <td colspan="2" ng-repeat="color in refdetail.Colores">
+                                                        <span class="block">{{color}}</span>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Talla</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td ng-repeat-start="color in refdetail.Colores">
+                                                        <input type="text" size="3" maxlength="3" name="{{color}}" />
+                                                    </td>
+                                                    <td ng-repeat-end=""><button class="btn btn-default" target="_self" ng-click="AsignAllTallas(color)"><span class="glyphicon glyphicon-arrow-down"></span></button> </td>
+                                                    <td>Total</td>
+                                                </tr>
+                                                <tr ng-repeat="talla in refdetail.Tallas">
+                                                    <td>{{talla}}</td>
+                                                    <td>
+                                                        <input type="text" size="3" maxlength="3" name="" />
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-default" onclick="AsignAllColors(this)"><span class="glyphicon glyphicon-arrow-right"></a>
+                                                    </td>
+                                                    <td ng-repeat-start="color in refdetail.Colores">
+                                                        <input type="hidden" size="3" maxlength="3" name="id" value="{{refdetail.itemId}}" />
+                                                        <input type="hidden" size="3" maxlength="3" name="referencia" value="{{refdetail.IdReferencia}}" />
+                                                        <input type="hidden" size="3" maxlength="3" name="oferta" value="{{refdetail.IdOferta}}" />
+                                                        <span ng-repeat="plu in refdetail.Plu | filter:{Talla: talla, Color: color}:true">
+                                                            <input type="hidden" size="3" maxlength="3" name="plu" value="{{plu.Codigo}}" />
+                                                        </span>
+                                                        <input type="hidden" size="3" maxlength="3" name="talla" value="{{talla}}" />
+                                                        <input type="hidden" size="3" maxlength="3" name="color" value="{{color}}" />
+                                                        <input type="text" size="3" maxlength="3" name="{{color}}" />
+                                                    </td>
+                                                    <td ng-repeat-end="">
+                                                        /
+                                                        <span ng-repeat="plu in refdetail.Plu | filter:{Talla: talla, Color: color}:true">
+                                                            {{plu.stock}}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" size="3" maxlength="3" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td ng-repeat-start="color in refdetail.Colores">
+                                                        <input type="text" size="3" maxlength="3" name="{{color}}" />
+                                                    </td>
+                                                    <td ng-repeat-end=""></td>
+                                                    <td><input type="text" size="3" maxlength="3" name="totalGeneral" /></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-defaul" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="AgregarItem()" >Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

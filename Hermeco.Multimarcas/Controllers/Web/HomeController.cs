@@ -43,5 +43,14 @@ namespace Hermeco.Multimarcas.Controllers
             }
             return RedirectToAction("login", "Account");
         }
+
+        public ActionResult Busqueda()
+        {
+            if (Security.ValidarAcceso())
+            {
+                return View();
+            }
+            return RedirectToAction("login", "Account");
+        }
     }
 }

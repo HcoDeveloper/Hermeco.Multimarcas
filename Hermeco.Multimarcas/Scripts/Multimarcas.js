@@ -18,6 +18,11 @@ MultimarcasApp.config([
             controller: 'PedidoController',
 
         })
+        .when(webBaseUrl + 'Busqueda', {
+            templateUrl: webBaseUrl + 'Home/Busqueda',
+            controller: 'BusquedaController',
+
+        })
         .when(webBaseUrl + 'Logout', {
             templateUrl: webBaseUrl + 'Account/Logout',
             controller: 'OfertaController'
@@ -29,7 +34,20 @@ MultimarcasApp.config([
     }
 ])
 
-MultimarcasApp.run(function ($rootScope, $http) {
+MultimarcasApp.run(function ($rootScope, $http, $location) {
+
+    $rootScope.alerts = [];
+
+    $rootScope.addAlert = function (tipo, message) {
+        $rootScope.$apply(function () {
+            $rootScope.alerts.push({ type: tipo, msg: message });
+        });
+    };
+
+    $rootScope.closeAlert = function (index) {
+        $rootScope.alerts.splice(index, 1);
+    };
+
     $http.get(apiBaseUrl + '/Account')
        .then(function (response) {
            $rootScope.infoCliente = response.data;
@@ -42,7 +60,6 @@ MultimarcasApp.controller('OfertaController', OfertaController);
 MultimarcasApp.
   filter('capitalize', function () {
       return function (input, all) {
-          var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;
-          return (!!input) ? input.replace(reg, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); }) : '';
+          return input.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
       }
   });

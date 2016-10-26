@@ -69,10 +69,29 @@ function AgregarItem() {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json'
     }).done(function (response) {
+        angular.element(document.getElementById('offcorssApp')).scope().addAlert('success', response);
         console.log(response);
     });
 
 }
 
+function sumarH() {
+    $(element.parentElement.parentElement).each(function () {
+        $('input[type=text]', this).each(function () {
+            total += Number($(this).val());
+            last = $(this);
+        });
+    });
+}
+
+function sumrV(color) {
+    var elements = document.getElementsByName(color);
+    var total = 0;
+    for (i = 1; i < elements.length; i++) {
+        elements[i].value = elements[0].value;
+        total += Number(elements[0].value);
+    }
+    elements[elements.length - 1].value = total;
+}
 
 

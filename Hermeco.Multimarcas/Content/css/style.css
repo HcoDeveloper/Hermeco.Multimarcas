@@ -280,7 +280,8 @@ portafolio * {
 .modal .modal-body {
     overflow-y: auto;
     overflow-x: auto;
-    max-height: 700px;
+    max-height: 70%;
+    max-height: 70vh;
 }
 
 .modal-body table {
@@ -584,4 +585,15 @@ table tr td {
     .mensaje {
         margin-top: 80px;
         margin-left: 10px;
+    }
+
+    .alert {
+        position:fixed;
+        z-index: 999;
+        top: 90px;
+        right:1%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid transparent;
+        border-radius: 4px;
     }

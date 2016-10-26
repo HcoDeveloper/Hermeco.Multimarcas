@@ -41,9 +41,9 @@
                     <div id="offcorss-navbar" class="navbar-collapse collapse">
                         <form class="navbar-form navbar-left">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Buscar Referencia...">
+                                <input type="text" class="form-control" placeholder="Buscar Referencia..." ng-model="refid">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">Buscar</button>
+                                    <a class="btn btn-default" type="button" href="@Url.Content("~/")Busqueda/?refid={{refid}}">Buscar</a>
                                 </span>
                             </div>
                         </form>
@@ -84,6 +84,11 @@
                 </div>
             </div>
         </div>
+        <div ng-repeat="alert in alerts" ng-class="'alert alert-' + (alert.type || 'warning')" aria-label="close">
+            <a href="" class="close" data-dismiss="alert" aria-label="close" ng-click="closeAlert($index)">&times;</a>
+            {{alert.msg}}
+        </div>
+
         <div class="footer-page">
             <span class="glyphicon glyphicon-envelope"></span> OFFCORSS es una marca de C.I. Hermeco S.A. PBX. +54(4)3847100 - Fax. +57(4) 262 0803 A.A. 50945 - Medellin, Colombia
         </div>
