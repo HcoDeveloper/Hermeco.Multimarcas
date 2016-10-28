@@ -63,21 +63,23 @@ namespace Hermeco.Multimarcas.Controllers
                             ps.AddItem(cie);
                         }
                     }
-                    
-                    msg.Content = new ObjectContent<object>("El producto ha sido agregado al carro de compras", new System.Net.Http.Formatting.JsonMediaTypeFormatter());
+                    Mensaje mensaje = new Mensaje() { Type = "success", Descripcion = "El producto ha sido agregado al carro de compras" };
+                    msg.Content = new ObjectContent<object>(mensaje, new System.Net.Http.Formatting.JsonMediaTypeFormatter());
                     msg.StatusCode = HttpStatusCode.OK;
                     return msg;
                 }
                 else
                 {
-                    msg.Content = new ObjectContent<object>("La sesión ha sido finalizada por inactividad", new System.Net.Http.Formatting.JsonMediaTypeFormatter());
+                    Mensaje mensaje = new Mensaje() { Type = "danger", Descripcion = "La sesión ha sido finalizada por inactividad" };
+                    msg.Content = new ObjectContent<object>(mensaje, new System.Net.Http.Formatting.JsonMediaTypeFormatter());
                     msg.StatusCode = HttpStatusCode.Gone;
                     return msg;
                 }
             }
             catch
             {
-                msg.Content = new ObjectContent<object>("Ha ocurrido un error agregando el producto", new System.Net.Http.Formatting.JsonMediaTypeFormatter());
+                Mensaje mensaje = new Mensaje() { Type = "danger", Descripcion = "Ha ocurrido un error agregando el producto" };
+                msg.Content = new ObjectContent<object>( mensaje, new System.Net.Http.Formatting.JsonMediaTypeFormatter());
                 msg.StatusCode = HttpStatusCode.BadRequest;
                 return msg;
             }
@@ -94,13 +96,15 @@ namespace Hermeco.Multimarcas.Controllers
                 string color = HttpContext.Current.Request.QueryString["color"].ToString();
                 PedidoService ps = new PedidoService();
                 Boolean removed = ps.RemoveItem(nit, referencia, color);
-                msg.Content = new ObjectContent<object>("Los elementos han sido eliminados.", new System.Net.Http.Formatting.JsonMediaTypeFormatter());
+                Mensaje mensaje = new Mensaje() { Type = "success", Descripcion = "Los elementos han sido eliminados." };
+                msg.Content = new ObjectContent<object>(mensaje, new System.Net.Http.Formatting.JsonMediaTypeFormatter());
                 msg.StatusCode = HttpStatusCode.OK;
                 return msg;
             }
             else
             {
-                msg.Content = new ObjectContent<object>("La sesión ha sido finalizada por inactividad", new System.Net.Http.Formatting.JsonMediaTypeFormatter());
+                Mensaje mensaje = new Mensaje() { Type = "danger", Descripcion = "La sesión ha sido finalizada por inactividad" };
+                msg.Content = new ObjectContent<object>(mensaje, new System.Net.Http.Formatting.JsonMediaTypeFormatter());
                 msg.StatusCode = HttpStatusCode.NoContent;
                 return msg;
             }

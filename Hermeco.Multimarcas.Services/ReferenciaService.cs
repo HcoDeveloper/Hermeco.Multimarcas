@@ -72,7 +72,10 @@ namespace Hermeco.Multimarcas.Services
                         break;   
                     }
                     fillImages(ref refe, includeFirstImg);
-                    referencias.Add(refe);
+                    if (refe.Plu.Count > 0)
+                    {
+                        referencias.Add(refe);
+                    }
                 }
                 return referencias;
             }
@@ -105,7 +108,10 @@ namespace Hermeco.Multimarcas.Services
                     {
                         fillPlu(ref refe, dr);
                     }
-                    referencias.Add(refe);
+                    if (refe.Plu.Count > 0)
+                    {
+                        referencias.Add(refe);
+                    }
                 }
                 return referencias;
             }
@@ -113,20 +119,28 @@ namespace Hermeco.Multimarcas.Services
 
         public Referencia GetReferencia(int OfertaId, String RefId, Boolean loadImages = false, Boolean juegoCompletoImagenes = true)
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["dbComercial"].ConnectionString;
-            int pageSize = System.Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
             Referencia referencia = null;
-            using (var session = SessionManager.OpenSession(connectionString)){
-                    var referenciaEntity = (from r in session.Query<ReferenciaOfertasEntity>()
-                                        where r.IdReferencia.Equals(RefId) && r.IdOferta.Equals(OfertaId) && r.Activa.Equals(true)
-                                        orderby r.IdReferencia
-                                        select r).Single();
-                referencia = fillReferencia(referenciaEntity);
-                fillPlu(ref referencia);
-                if (loadImages)
-                {
-                    fillImages(ref referencia, juegoCompletoImagenes);
+            try
+            {
+                var connectionString = ConfigurationManager.ConnectionStrings["dbComercial"].ConnectionString;
+                int pageSize = System.Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
+                
+                using (var session = SessionManager.OpenSession(connectionString)){
+                      var  referenciaOfertasEntity = (from r in session.Query<ReferenciaOfertasEntity>()
+                                            where r.IdReferencia.Equals(RefId) && r.IdOferta.Equals(OfertaId) && r.Activa.Equals(true)
+                                            orderby r.IdReferencia
+                                            select r).Single();
+                    referencia = fillReferencia(referenciaOfertasEntity);
+                    fillPlu(ref referencia);
+                    if (loadImages)
+                    {
+                        fillImages(ref referencia, juegoCompletoImagenes);
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                //TODO: Mensaje de error;
             }
             return referencia;
         }
@@ -293,7 +307,7 @@ namespace Hermeco.Multimarcas.Services
             var connectionString = ConfigurationManager.ConnectionStrings["dbComercial"].ConnectionString;
             using (var session = SessionManager.OpenSession(connectionString))
             {
-                List<string> Colores = new List<string>();
+                //List<string> Colores = new List<string>();
                 List<ImagenesReferenciaEntity> imagenes = null;
                 if (juegoCompleto) {
                     imagenes = (from i in session.Query<ImagenesReferenciaEntity>()
@@ -312,13 +326,14 @@ namespace Hermeco.Multimarcas.Services
 
                 foreach (ImagenesReferenciaEntity imagen in imagenes)
                 {
-                    if (referencia.Colores.Contains(imagen.DescripcionColor))
-                    {
-                        if (!Colores.Contains(imagen.DescripcionColor))
-                        {
-                            Colores.Add(imagen.DescripcionColor);
-                        }
-                    }
+
+                    //if (referencia.Colores.Contains(imagen.DescripcionColor))
+                    //{
+                    //    if (!Colores.Contains(imagen.DescripcionColor))
+                    //    {
+                    //        Colores.Add(imagen.DescripcionColor);
+                    //    }
+                    //}
                     referencia.Imagenes.Add(new Imagenes
                     {
                         Clasificacion = imagen.Clasificacion,
@@ -334,7 +349,7 @@ namespace Hermeco.Multimarcas.Services
                         Orden = imagen.Orden
                     });             
                 }
-                referencia.Colores = Colores;
+                //referencia.Colores = Colores;
             }
         }
     }

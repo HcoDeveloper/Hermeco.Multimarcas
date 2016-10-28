@@ -16,13 +16,23 @@ namespace Hermeco.Multimarcas.Controllers.Api
         public HttpResponseMessage Get()
         {
             var Session = HttpContext.Current.Session;
-            string Nit = Session["UserNit"].ToString();
-            ClienteService cs = new ClienteService();
-            Cliente cliente = cs.getInfoClient(Nit);
             HttpResponseMessage msg = new HttpResponseMessage();
-            msg.Content = new ObjectContent<object>(cliente, new System.Net.Http.Formatting.JsonMediaTypeFormatter());
-            msg.StatusCode = HttpStatusCode.OK;
-            return msg;
+            if (Session["UserNit"] != null)
+            {
+                string Nit = Session["UserNit"].ToString();
+                ClienteService cs = new ClienteService();
+                Cliente cliente = cs.getInfoClient(Nit);
+                msg.Content = new ObjectContent<object>(cliente, new System.Net.Http.Formatting.JsonMediaTypeFormatter());
+                msg.StatusCode = HttpStatusCode.OK;
+                return msg;
+            }
+            else
+            {
+                Mensaje mensaje = new Mensaje() { Type = "danger", Descripcion = "La sesión ha sido finalizada por inactividad" };
+                msg.Content = new ObjectContent<object>(mensaje, new System.Net.Http.Formatting.JsonMediaTypeFormatter());
+                msg.StatusCode = HttpStatusCode.Gone;
+                return msg;
+            }
         }
     }
 }

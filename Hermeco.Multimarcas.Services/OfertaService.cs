@@ -40,43 +40,43 @@ namespace Hermeco.Multimarcas.Services
                     oferta.FechaVencimiento = ofertaEntity.FechaVencimiento;
 
                     oferta.FecUser = ofertaEntity.FecUser;
-                    //if (oferta.Id == activeOferta)
-                    //{
+                    if (oferta.Id == activeOferta)
+                    {
 
-                    //    ReferenciaService rs = new ReferenciaService();
-                    //    List<Referencia> referencias = rs.GetAllReferenciasByOferta(Nit, ofertaEntity.Id);
-                    //    //int TotalReferencia = referencias.Count();
-                    //    //foreach (Referencia referencia in referencias)
-                    //    //{
-                    //    //    Mundo mundo = new Mundo();
-                    //    //    string NombreMundo = Utility.GetMundo(referencia.Plu[0].Genero.ToString(), referencia.Plu[0].Edad.ToString());
-                    //    //    /*
-                    //    //    foreach (Plu plu in referencia.Plu)
-                    //    //    {
-                    //    //        NombreMundo = Utility.GetMundo(plu.Genero.ToString(), plu.Edad.ToString());
-                    //    //    }
-                    //    //    if (oferta.Mundos.Any(item => item.Nombre.Equals(NombreMundo)))
-                    //    //    {
-                    //    //        var mundoUpdate = oferta.Mundos.FirstOrDefault(x => x.Nombre == NombreMundo);
-                    //    //        if (mundoUpdate != null)
-                    //    //        {
-                    //    //            mundoUpdate.Cantidad++;
-                    //    //        }
-                    //    //    }
-                    //    //    else
-                    //    //    {
-                    //    //        mundo.Cantidad = 1;
-                    //    //        mundo.Nombre = NombreMundo;
-                    //    //        oferta.Mundos.Add(mundo);
-                    //    //    }
-                    //    //     */
-                    //    //    if (!oferta.Mundos.Any(item => item.Nombre.Equals(NombreMundo)))
-                    //    //    {
-                    //    //        mundo.Nombre = NombreMundo;
-                    //    //        oferta.Mundos.Add(mundo);
-                    //    //    }
-                    //    //}
-                    //}
+                        ReferenciaService rs = new ReferenciaService();
+                        List<Referencia> referencias = rs.GetAllReferenciasByOferta(Nit, ofertaEntity.Id);
+                        int TotalReferencia = referencias.Count();
+                        foreach (Referencia referencia in referencias)
+                        {
+                            Mundo mundo = new Mundo();
+                            string NombreMundo = Utility.GetMundo(referencia.Plu[0].Genero.ToString(), referencia.Plu[0].Edad.ToString());
+                            /*
+                            foreach (Plu plu in referencia.Plu)
+                            {
+                                NombreMundo = Utility.GetMundo(plu.Genero.ToString(), plu.Edad.ToString());
+                            }
+                            if (oferta.Mundos.Any(item => item.Nombre.Equals(NombreMundo)))
+                            {
+                                var mundoUpdate = oferta.Mundos.FirstOrDefault(x => x.Nombre == NombreMundo);
+                                if (mundoUpdate != null)
+                                {
+                                    mundoUpdate.Cantidad++;
+                                }
+                            }
+                            else
+                            {
+                                mundo.Cantidad = 1;
+                                mundo.Nombre = NombreMundo;
+                                oferta.Mundos.Add(mundo);
+                            }
+                             */
+                            if (!oferta.Mundos.Any(item => item.Nombre.Equals(NombreMundo)))
+                            {
+                                mundo.Nombre = NombreMundo;
+                                oferta.Mundos.Add(mundo);
+                            }
+                        }
+                    }
                     ofertas.Add(oferta);
                 }
             }

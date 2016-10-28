@@ -1,4 +1,4 @@
-﻿var PedidoController = ['$scope', '$http', '$routeParams',function ($scope, $http, $routeParams) {
+﻿var PedidoController = ['$scope', '$http', '$routeParams', '$route', '$rootScope' ,function ($scope, $http, $routeParams, $route, $rootScope) {
 
     $http.get(apiBaseUrl + '/pedido')
        .then(function (response) {
@@ -10,10 +10,12 @@
            }
        });
 
-    $scope.GetSummGroup = function (group) {
+    $scope.GetSummGroup = function (group, color) {
         var summ = 0;
         for (var i in group) {
-            summ = summ + Number(group[i].Cantidad);
+            if (group[i].Color === color) {
+                summ = summ + Number(group[i].Cantidad);
+            }
         }
         return summ;
     };
@@ -44,7 +46,7 @@
             console.log(fieldName);
         }
     }
-
+    /*
     $scope.validarNumero = function (event, fieldName) {
         var keycode = event.which;
         if (!(event.shiftKey == false && (keycode == 46 || keycode == 8 || keycode == 37 || keycode == 39 || (keycode >= 48 && keycode <= 57)))) {
@@ -64,7 +66,7 @@
         console.log(event);
         console.log(fieldName);
     }
-
+    */
     $scope.AsignAllTallas = function (color) {
         console.log(color);
         var elements = document.getElementsByName(color);
@@ -86,7 +88,9 @@
     $scope.eliminar = function (refeid, color) {
         $http.delete(apiBaseUrl + '/Pedido/?&referencia=' + refeid + "&color=" + color)
             .success(function (data, status, headers) {
-                $scope.refdetail = data;
+                //$scope.addAlert(data.Type, data.Descripcion);
+                //$rootScope.addAlert(data.Type, data.Descripcion);
+                $route.reload();
             });
     }
 
@@ -98,13 +102,6 @@
             });
     }
 
-    $scope.addAlert = function (message) {
-        $scope.alerts.push({ msg: message});
-    };
-
-    $scope.closeAlert = function (index) {
-        $scope.alerts.splice(index, 1);
-    };
 
 }]
 

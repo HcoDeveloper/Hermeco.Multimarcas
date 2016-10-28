@@ -6,7 +6,7 @@
            console.log($scope.ofertaActiva);
        })
         .error(function (response, status) {
-            alert(response);
+            //alert(response);
         })
        .finally(function () {
            // Flag loading as complete

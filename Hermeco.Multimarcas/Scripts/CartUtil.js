@@ -26,7 +26,7 @@
     });
 }
 
-function AgregarItem() {
+function AgregarItem(refresh ) {
     var table = document.getElementById("ItemPedido");
     jsonObj = [];
     for (var i = 1, row; row = table.rows[i]; i++) {
@@ -69,8 +69,13 @@ function AgregarItem() {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json'
     }).done(function (response) {
-        angular.element(document.getElementById('offcorssApp')).scope().addAlert('success', response);
-        console.log(response);
+        angular.element(document.getElementById('offcorssApp')).scope().addAlert(response.Type, response.Descripcion);
+        if (refresh) {
+            angular.element(document.getElementById('offcorssApp')).scope().refreshPage();
+        }
+        $('#info-producto').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove()
     });
 
 }

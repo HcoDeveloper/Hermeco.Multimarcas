@@ -181,6 +181,7 @@
     <Compile Include="Controllers\Api\CatalogoController.cs" />
     <Compile Include="Controllers\Api\ItemPedido.cs" />
     <Compile Include="Controllers\Api\ItemPedidoController.cs" />
+    <Compile Include="Controllers\Api\Mensaje.cs" />
     <Compile Include="Controllers\Api\OrdenCompraController.cs" />
     <Compile Include="Controllers\Api\PedidoController.cs" />
     <Compile Include="Controllers\Api\ReferenciaController.cs" />

@@ -34,7 +34,7 @@ MultimarcasApp.config([
     }
 ])
 
-MultimarcasApp.run(function ($rootScope, $http, $location) {
+MultimarcasApp.run(function ($rootScope, $http, $location, $route) {
 
     $rootScope.alerts = [];
 
@@ -47,6 +47,30 @@ MultimarcasApp.run(function ($rootScope, $http, $location) {
     $rootScope.closeAlert = function (index) {
         $rootScope.alerts.splice(index, 1);
     };
+
+    $rootScope.refreshPage = function () {
+        $route.reload();
+    };
+
+    $rootScope.validarNumero = function (event, fieldName) {
+        var keycode = event.which;
+        if (!(event.shiftKey == false && (keycode == 46 || keycode == 8 || keycode == 37 || keycode == 39 || (keycode >= 48 && keycode <= 57)))) {
+            event.preventDefault();
+        }
+        cantidad = document.getElementById('cantidad' + fieldName);
+        stock = document.getElementById('stock' + fieldName);
+        //value = cantidad.value.concat(event.key);
+        if (cantidad.selectionStart == 0)
+            inverseValue = event.key.concat(cantidad.value);
+        else
+            inverseValue = cantidad.value.substring(0, cantidad.selectionStart) + event.key + cantidad.value.substring(cantidad.selectionStart, cantidad.value.length)
+        if (Number(inverseValue) > Number(stock.value)) {
+            event.preventDefault();
+        }
+        console.log(cantidad.selectionStart);
+        console.log(event);
+        console.log(fieldName);
+    }
 
     $http.get(apiBaseUrl + '/Account')
        .then(function (response) {

@@ -147,7 +147,7 @@
                                                     <td></td>
                                                     <td></td>
                                                     <td ng-repeat-start="color in refdetail.Colores">
-                                                        <input type="text" size="3" maxlength="3" name="{{color}}" />
+                                                        <input type="text" size="3" maxlength="3" name="{{color}}" ng-keypress="validarNumero($event, plu.Codigo)" />
                                                     </td>
                                                     <td ng-repeat-end=""><button class="btn btn-default" target="_self" ng-click="AsignAllTallas(color)"><span class="glyphicon glyphicon-arrow-down"></span></button> </td>
                                                     <td>Total</td>
@@ -155,7 +155,7 @@
                                                 <tr ng-repeat="talla in refdetail.Tallas">
                                                     <td>{{talla}}</td>
                                                     <td>
-                                                        <input type="text" size="3" maxlength="3" name="" />
+                                                        <input type="text" size="3" maxlength="3" name="" ng-keypress="validarNumero($event, plu.Codigo)" />
                                                     </td>
                                                     <td>
                                                         <a href="#" class="btn btn-default" onclick="AsignAllColors(this)"><span class="glyphicon glyphicon-arrow-right"></a>
@@ -169,7 +169,7 @@
                                                         </span>
                                                         <input type="hidden" size="3" maxlength="3" name="talla" value="{{talla}}" />
                                                         <input type="hidden" size="3" maxlength="3" name="color" value="{{color}}" />
-                                                        <input type="text" size="3" maxlength="3" name="{{color}}" />
+                                                        <input type="text" size="3" maxlength="3" name="{{color}}" ng-keypress="validarNumero($event, plu.Codigo)" />
                                                     </td>
                                                     <td ng-repeat-end="">
                                                         /
@@ -178,7 +178,7 @@
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <input type="text" size="3" maxlength="3" />
+                                                        <input type="text" size="3" maxlength="3" readonly />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -186,10 +186,10 @@
                                                     <td></td>
                                                     <td></td>
                                                     <td ng-repeat-start="color in refdetail.Colores">
-                                                        <input type="text" size="3" maxlength="3" name="{{color}}" />
+                                                        <input type="text" size="3" maxlength="3" name="{{color}}" readonly />
                                                     </td>
                                                     <td ng-repeat-end=""></td>
-                                                    <td><input type="text" size="3" maxlength="3" name="totalGeneral" /></td>
+                                                    <td><input type="text" size="3" maxlength="3" name="totalGeneral" readonly /></td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -199,7 +199,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-defaul" data-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="AgregarItem()" >Agregar</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="AgregarItem(false)" >Agregar</button>
                             </div>
                         </div>
                     </div>

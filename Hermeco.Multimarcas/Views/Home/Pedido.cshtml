@@ -29,7 +29,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div><label>{{referencia.Plu[0].Descripcion}}</label></div>
-                                        <label>Ref: </label> {{referencia.IdReferencia}} - {{referencia.IdOferta}}
+                                        <label>Ref: </label> {{referencia.IdReferencia}}
                                         <div><label>Precio: </label> $ {{formatNumber(referencia.Plu[0].Precio)}}</div>
                                         <div><label>Oferta: </label> $ {{formatNumber(referencia.Plu[0].Precio)}}</div>
                                         <div><label>Color: </label> {{color}}</div>
@@ -40,16 +40,21 @@
                                         <div class="col-md-12" ng-repeat="plu in referencia.Plu | filter: {Color: color }">
                                             <div class="col-md-4">{{plu.Talla}}</div>
                                             <div class="col-md-4">
+                                                <!-- 
                                                 <a href="" target="_self" ng-click="decrementar(plu.Codigo)">
                                                     <span class="glyphicon glyphicon-minus"></span>
                                                 </a>
+                                                -->
                                                 <input id="Id{{plu.Codigo}}" name="Id" type="hidden" value="{{plu.Id}}" />
                                                 <input id="itemId{{plu.Codigo}}" name="itemid" type="hidden" value="{{plu.Codigo}}" />
                                                 <input id="stock{{plu.Codigo}}" name="stock" type="hidden" value="{{plu.stock}}" />
+                                                <!-- 
                                                 <input id="cantidad{{plu.Codigo}}" name="cantidad" type="text" value="{{plu.Cantidad}}" maxlength="4" size="4" ng-keypress="validarNumero($event, plu.Codigo)" />
                                                 <a href="" target="_self" ng-click="incrementar(plu.Codigo)">
                                                     <span class="glyphicon glyphicon-plus"></span>
                                                 </a>
+                                                -->
+                                                <span>{{plu.Cantidad}}</span>
                                                 <span ng-if="plu.Cantidad > plu.stock" class="glyphicon glyphicon-remove" style="color:red"></span>
                                                 <span ng-if="plu.Cantidad <= plu.stock" class="glyphicon glyphicon-ok" style="color:green"></span>
 
@@ -57,7 +62,7 @@
                                             <div class="col-md-4">{{plu.stock}}</div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">$ {{formatNumber(referencia.Plu[0].Precio * GetSummGroup(referencia.Plu)) | filter: {Plu.Color: color} }}</div>
+                                    <div class="col-md-2">$ {{formatNumber(referencia.Plu[0].Precio * GetSummGroup(referencia.Plu, color))  }}</div>
                                 </div>
                                 <span style="margin-top:2px;">&nbsp;</span>
                                 <hr style="color:black; background-color:black; width:75%;" />
@@ -88,7 +93,7 @@
                         <div ng-include="'@Url.Content("~/Content/terminos.html")'"></div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -170,7 +175,7 @@
                                             <td></td>
                                             <td></td>
                                             <td ng-repeat-start="color in refdetail.Colores">
-                                                <input type="text" size="3" maxlength="3" name="{{color}}" />
+                                                <input type="text" size="3" maxlength="3" name="{{color}}" ng-keypress="validarNumero($event, plu.Codigo)" />
                                             </td>
                                             <td ng-repeat-end=""><button class="btn btn-default" target="_self" ng-click="AsignAllTallas(color)"><span class="glyphicon glyphicon-arrow-down"></span></button> </td>
                                             <td>Total</td>
@@ -178,7 +183,7 @@
                                         <tr ng-repeat="talla in refdetail.Tallas">
                                             <td>{{talla}}</td>
                                             <td>
-                                                <input type="text" size="3" maxlength="3" name="" />
+                                                <input type="text" size="3" maxlength="3" name="" ng-keypress="validarNumero($event, plu.Codigo)" />
                                             </td>
                                             <td>
                                                 <a href="#" class="btn btn-default" onclick="AsignAllColors(this)"><span class="glyphicon glyphicon-arrow-right"></a>
@@ -205,7 +210,7 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <input type="text" size="3" maxlength="3" />
+                                                <input type="text" size="3" maxlength="3" readonly />
                                             </td>
                                         </tr>
                                         <tr>
@@ -213,10 +218,10 @@
                                             <td></td>
                                             <td></td>
                                             <td ng-repeat-start="color in refdetail.Colores">
-                                                <input type="text" size="3" maxlength="3" name="{{color}}" />
+                                                <input type="text" size="3" maxlength="3" name="{{color}}" readonly  />
                                             </td>
                                             <td ng-repeat-end=""></td>
-                                            <td><input type="text" size="3" maxlength="3" name="totalGeneral" /></td>
+                                            <td><input type="text" size="3" maxlength="3" name="totalGeneral" readonly /></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -226,7 +231,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-defaul" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="AgregarItem()">Agregar</button>
+                        <button type="button" class="btn btn-primary" onclick="AgregarItem(true)">Agregar</button>
                     </div>
                 </div>
             </div>
