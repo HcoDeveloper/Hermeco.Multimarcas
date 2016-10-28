@@ -14,6 +14,7 @@ namespace Hermeco.Multimarcas.Controllers
             {
                 return View();
             }
+            //return new HttpStatusCodeResult(404, "La sesión ha caducado");
             return RedirectToAction("login", "Account");
         }
 
@@ -23,7 +24,8 @@ namespace Hermeco.Multimarcas.Controllers
             {
                 return View();
             }
-            return RedirectToAction("login", "Account");
+            return new HttpStatusCodeResult(404, "La sesión ha caducado");
+            //return RedirectToAction("login", "Account");
         }
 
         public ActionResult Ofertas()
@@ -32,7 +34,8 @@ namespace Hermeco.Multimarcas.Controllers
             {
                 return View();
             }
-            return RedirectToAction("login", "Account");
+            return new HttpStatusCodeResult(404, "La sesión ha caducado");
+            //return RedirectToAction("login", "Account");
         }
 
         public ActionResult Pedido()
@@ -41,7 +44,8 @@ namespace Hermeco.Multimarcas.Controllers
             {
                 return View();
             }
-            return RedirectToAction("login", "Account");
+            return new HttpStatusCodeResult(404, "La sesión ha caducado");
+            //return RedirectToAction("login", "Account");
         }
 
         public ActionResult Busqueda()
@@ -50,7 +54,8 @@ namespace Hermeco.Multimarcas.Controllers
             {
                 return View();
             }
-            return RedirectToAction("login", "Account");
+            return new HttpStatusCodeResult(404, "La sesión ha caducado");
+            //return RedirectToAction("login", "Account");
         }
     }
 }

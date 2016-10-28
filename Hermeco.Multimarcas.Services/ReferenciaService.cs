@@ -74,6 +74,14 @@ namespace Hermeco.Multimarcas.Services
                     fillImages(ref refe, includeFirstImg);
                     if (refe.Plu.Count > 0)
                     {
+                        try
+                        {
+                            refe.PrecioOferta = System.Convert.ToInt32(refe.Plu[0].Precio - ((refe.Plu[0].Precio * System.Convert.ToDecimal(refe.AjustePrecio)) / 100));
+                        }
+                        catch (DivideByZeroException)
+                        {
+                            refe.PrecioOferta = System.Convert.ToInt32( refe.Plu[0].Precio);
+                        }
                         referencias.Add(refe);
                     }
                 }
@@ -100,17 +108,27 @@ namespace Hermeco.Multimarcas.Services
 
                 CustomerService cs = new CustomerService();
                 DataSet dsMaterial = cs.ObtenerMaterialCustomerService(newList);
-
-                foreach (ReferenciaOfertasEntity referencia in referenciasEntity)
+                if (dsMaterial != null)
                 {
-                    Referencia refe = fillReferencia(referencia);
-                    foreach (DataRow dr in dsMaterial.Tables[0].Select("CODMATERIAL = " + referencia.IdReferencia))
+                    foreach (ReferenciaOfertasEntity referencia in referenciasEntity)
                     {
-                        fillPlu(ref refe, dr);
-                    }
-                    if (refe.Plu.Count > 0)
-                    {
-                        referencias.Add(refe);
+                        Referencia refe = fillReferencia(referencia);
+                        foreach (DataRow dr in dsMaterial.Tables[0].Select("CODMATERIAL = " + referencia.IdReferencia))
+                        {
+                            fillPlu(ref refe, dr);
+                        }
+                        if (refe.Plu.Count > 0)
+                        {
+                            try
+                            {
+                                refe.PrecioOferta = System.Convert.ToInt32(refe.Plu[0].Precio - ((refe.Plu[0].Precio * System.Convert.ToDecimal(refe.AjustePrecio)) / 100));
+                            }
+                            catch (DivideByZeroException)
+                            {
+                                refe.PrecioOferta = System.Convert.ToInt32(refe.Plu[0].Precio);
+                            }
+                            referencias.Add(refe);
+                        }
                     }
                 }
                 return referencias;
@@ -132,6 +150,14 @@ namespace Hermeco.Multimarcas.Services
                                             select r).Single();
                     referencia = fillReferencia(referenciaOfertasEntity);
                     fillPlu(ref referencia);
+                    try
+                    {
+                        referencia.PrecioOferta = System.Convert.ToInt32(referencia.Plu[0].Precio - ((referencia.Plu[0].Precio * System.Convert.ToDecimal(referencia.AjustePrecio)) / 100));
+                    }
+                    catch (DivideByZeroException)
+                    {
+                        referencia.PrecioOferta = System.Convert.ToInt32(referencia.Plu[0].Precio);
+                    }
                     if (loadImages)
                     {
                         fillImages(ref referencia, juegoCompletoImagenes);
@@ -161,6 +187,14 @@ namespace Hermeco.Multimarcas.Services
                                         select r).Single();
                 referencia = fillReferencia(referenciaEntity);
                 fillPlu(ref referencia);
+                try
+                {
+                    referencia.PrecioOferta = System.Convert.ToInt32(referencia.Plu[0].Precio - ((referencia.Plu[0].Precio * System.Convert.ToDecimal(referencia.AjustePrecio)) / 100));
+                }
+                catch (DivideByZeroException)
+                {
+                    referencia.PrecioOferta = System.Convert.ToInt32(referencia.Plu[0].Precio);
+                }
                 if (loadImages)
                 {
                     fillImages(ref referencia, juegoCompletoImagenes);

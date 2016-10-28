@@ -5,8 +5,8 @@
            $scope.ofertas = response;
            console.log($scope.ofertaActiva);
        })
-        .error(function (response, status) {
-            //alert(response);
+        .error(function (error, status){
+            window.location.replace(apiBaseUrl);
         })
        .finally(function () {
            // Flag loading as complete

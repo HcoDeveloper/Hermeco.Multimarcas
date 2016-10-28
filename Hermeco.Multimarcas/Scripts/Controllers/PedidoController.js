@@ -1,14 +1,17 @@
 ﻿var PedidoController = ['$scope', '$http', '$routeParams', '$route', '$rootScope' ,function ($scope, $http, $routeParams, $route, $rootScope) {
 
     $http.get(apiBaseUrl + '/pedido')
-       .then(function (response) {
-           $scope.refPedido = response.data;
-           if (response.data.length === 0) {
-               $scope.hasCartItems = false;
-           } else {
-               $scope.hasCartItems = true;
-           }
-       });
+    .success(function (response) {
+        $scope.refPedido = response;
+        if ( response.length === 0) {
+            $scope.hasCartItems = false;
+        } else {
+            $scope.hasCartItems = true;
+        }
+    })
+     .error(function (error, status) {
+        window.location.replace(apiBaseUrl);
+    });
 
     $scope.GetSummGroup = function (group, color) {
         var summ = 0;

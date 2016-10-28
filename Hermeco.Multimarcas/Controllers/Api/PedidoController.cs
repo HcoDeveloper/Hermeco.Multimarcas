@@ -49,7 +49,7 @@ namespace Hermeco.Multimarcas.Controllers
                     PedidoService ps = new PedidoService();
                     foreach (ItemPedido item in items)
                     {
-                        if (item.Cantidad > 0)
+                        if (item.Cantidad >= 0 )
                         {
                             CartItemEntity cie = new CartItemEntity();
                             cie.Id = item.Id;
@@ -63,7 +63,7 @@ namespace Hermeco.Multimarcas.Controllers
                             ps.AddItem(cie);
                         }
                     }
-                    Mensaje mensaje = new Mensaje() { Type = "success", Descripcion = "El producto ha sido agregado al carro de compras" };
+                    Mensaje mensaje = new Mensaje() { Type = "success", Descripcion = "El carro de compras ha sido actualizado" };
                     msg.Content = new ObjectContent<object>(mensaje, new System.Net.Http.Formatting.JsonMediaTypeFormatter());
                     msg.StatusCode = HttpStatusCode.OK;
                     return msg;

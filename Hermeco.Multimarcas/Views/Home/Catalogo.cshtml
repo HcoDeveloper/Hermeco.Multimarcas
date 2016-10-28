@@ -43,9 +43,9 @@
                                 </div>
                                 <div><span>Ver +</span></div>
                                 <div class="info-producto">
-                                    <p>{{referencia.Plu[0].Descripcion | capitalize}}</p>
-                                    <p>{{referencia.Plu[0].Precio | currency}}</p>
-                                    <p>{{referencia.Plu[0].Precio | currency}}</p>
+                                    <p >{{referencia.Plu[0].Descripcion.substr(0,30) | capitalize}}</p>
+                                    <p ng-class="{'precio-hide' : referencia.PrecioOferta == referencia.Plu[0].Precio}" class="precio-referencia">$ {{formatNumber(referencia.PrecioOferta)}}</p>
+                                    <p ng-class="{'precio-diff' : referencia.PrecioOferta != referencia.Plu[0].Precio}" class="precio-normal">$ {{formatNumber(referencia.Plu[0].Precio)}}</p>
                                 </div>
                             </a>
                         </div>
@@ -118,12 +118,13 @@
                                                 <div>
                                                     <label>Tallas:</label><span ng-repeat="talla in refdetail.Tallas">{{talla}}&nbsp;</span>
                                                 </div>
-                                                <div>
-                                                    <label>Precio:</label><span class="precio-referencia">{{refdetail.Plu[0].Precio | currency}}</span>
+                                                <div ng-class="{'precio-hide' : refdetail.PrecioOferta == refdetail.Plu[0].Precio}">
+                                                    <label>Precio Oferta:</label><span class="precio-referencia">$ {{formatNumber(refdetail.PrecioOferta)}}</span>
                                                 </div>
-                                                <div>
-                                                    <label>Precio Oferta:</label>{{refdetail.Plu[0].Precio | currency}}
+                                                <div ng-class="{'precio-diff' : refdetail.PrecioOferta != refdetail.Plu[0].Precio}">
+                                                    <label>Precio:</label><span>$ {{formatNumber(refdetail.Plu[0].Precio)}}</span>
                                                 </div>
+                                                
                                             </div>
                                         </div>
 
@@ -138,6 +139,9 @@
                                                 <tr>
                                                     <td colspan="3"></td>
                                                     <td colspan="2" ng-repeat="color in refdetail.Colores">
+                                                        <div ng-repeat="Imagenes in refdetail.Imagenes | filter:{ DescripcionColor: color } ">
+                                                            <img class="img-responsive center" data-ng-src="data:image/JPEG;base64,{{Imagenes.Imagen }}" style=" display: block; max-height:50px; width: auto; height: auto;" />
+                                                        </div>
                                                         <span class="block">{{color}}</span>
                                                     </td>
                                                     <td></td>

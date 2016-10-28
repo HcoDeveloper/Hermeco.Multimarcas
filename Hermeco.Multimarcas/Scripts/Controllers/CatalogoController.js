@@ -6,9 +6,13 @@
         $scope.ofertaActiva = headers('ofertaActiva');
         console.log($scope.ofertaActiva);
     })
+    .error(function (error, status) {
+        window.location.replace(apiBaseUrl);
+    })
     .finally(function () {
         //$('body').addClass('loaded');
-    });    
+    });
+
     $http.get(apiBaseUrl + '/Account')
        .then(function (response) {
            $scope.infoCliente = response.data;

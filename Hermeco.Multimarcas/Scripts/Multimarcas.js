@@ -34,6 +34,18 @@ MultimarcasApp.config([
     }
 ])
 
+MultimarcasApp.directive("error", function ($rootScope) {
+    return {
+        restrict: "E",
+        template: webBaseUrl + 'Account/Logout',
+        link: function (scope) {
+            $rootScope.$on("routeeChangeError", function (event, current, previous, rejection) {
+                console.log(event);
+            })
+        }
+    }
+})
+
 MultimarcasApp.run(function ($rootScope, $http, $location, $route) {
 
     $rootScope.alerts = [];
@@ -76,7 +88,17 @@ MultimarcasApp.run(function ($rootScope, $http, $location, $route) {
        .then(function (response) {
            $rootScope.infoCliente = response.data;
        });
+
+    $rootScope.$on("routeeChangeError", function (event, current, previous, rejection) {
+        console.log(event);
+    });
+
+    $rootScope.formatNumber = function (number) {
+        return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+    }
 });
+
+
 
 MultimarcasApp.controller('OfertaController', OfertaController);
 

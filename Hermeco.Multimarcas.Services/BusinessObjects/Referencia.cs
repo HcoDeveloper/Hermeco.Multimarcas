@@ -18,6 +18,7 @@ namespace Hermeco.Multimarcas.Services.BusinessObjects
         public string GuiaTallas { get; set; }
         public string CategoriaComercial { get; set; }
         public int Orden { get; set; }
+        public float PrecioOferta { get; set; }
         public List<Plu> Plu = new List<Plu>();
         public List<Imagenes> Imagenes = new List<Imagenes>();
         public List<string> Tallas = new List<string>();

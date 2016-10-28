@@ -74,12 +74,22 @@ namespace Hermeco.Multimarcas.Services
             {
                 if (entity.Id == 0)
                 {
-                    session.Save(entity);
+                    if (entity.Cantidad > 0)
+                    {
+                        session.Save(entity);
+                    }
                 }
                 else
                 {
-                    session.Update(entity);
-                    session.Flush();
+                    if (entity.Cantidad > 0) {
+                        session.Update(entity);
+                        session.Flush();
+                    }
+                    else
+                    {
+                        session.Delete(entity);
+                        session.Flush();
+                    }
                 }
             }
             return 1;

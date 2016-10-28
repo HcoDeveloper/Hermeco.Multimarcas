@@ -315,8 +315,9 @@ table tr td {
 }
 
 .precio-referencia {
-    color: red;
-    font-size: 2em;
+    color: #990000;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 
@@ -596,4 +597,16 @@ table tr td {
         margin-bottom: 10px;
         border: 1px solid transparent;
         border-radius: 4px;
+    }
+    .precio-diff {
+        display: inline-block;
+        text-decoration: line-through;
+    }
+
+    .precio-hide {
+        display: none;
+    }
+
+    .precio-normal {
+        font-weight: bold;
     }
