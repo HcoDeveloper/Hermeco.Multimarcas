@@ -68,20 +68,20 @@ MultimarcasApp.run(function ($rootScope, $http, $location, $route) {
         var keycode = event.which;
         if (!(event.shiftKey == false && (keycode == 46 || keycode == 8 || keycode == 37 || keycode == 39 || (keycode >= 48 && keycode <= 57)))) {
             event.preventDefault();
-        }
+        }        
         cantidad = document.getElementById('cantidad' + fieldName);
         stock = document.getElementById('stock' + fieldName);
-        //value = cantidad.value.concat(event.key);
-        if (cantidad.selectionStart == 0)
-            inverseValue = event.key.concat(cantidad.value);
-        else
-            inverseValue = cantidad.value.substring(0, cantidad.selectionStart) + event.key + cantidad.value.substring(cantidad.selectionStart, cantidad.value.length)
-        if (Number(inverseValue) > Number(stock.value)) {
-            event.preventDefault();
+        if (cantidad != null) {
+
+            //value = cantidad.value.concat(event.key);
+            if (cantidad.selectionStart == 0)
+                inverseValue = event.key.concat(cantidad.value);
+            else
+                inverseValue = cantidad.value.substring(0, cantidad.selectionStart) + event.key + cantidad.value.substring(cantidad.selectionStart, cantidad.value.length)
+            if (Number(inverseValue) > Number(stock.value)) {
+                event.preventDefault();
+            }
         }
-        console.log(cantidad.selectionStart);
-        console.log(event);
-        console.log(fieldName);
     }
 
     $http.get(apiBaseUrl + '/Account')
@@ -94,7 +94,38 @@ MultimarcasApp.run(function ($rootScope, $http, $location, $route) {
     });
 
     $rootScope.formatNumber = function (number) {
-        return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        if (number != undefined || number != null) {
+            return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        }
+    }
+
+    $rootScope.sumarH = function (element) {
+        var $rows = $("table tr");
+        var totalRows = $rows.length;
+        var total = 0;
+        var last = null;
+        for (var rowIndex = 2; rowIndex < totalRows; ++rowIndex) {
+            var currentRow = $($rows[rowIndex]);
+
+            $(currentRow).each(function () {
+                $('input[type=text]', this).each(function () {
+                    total += Number($(this).val());
+                    last = $(this);
+                });
+                total = total - Number(last.val());
+                last.val(total);
+                total = 0;
+            });
+        }
+    }
+
+    $rootScope.sumarV = function(color) {
+        var elements = document.getElementsByName(color);
+        var total = 0;
+        for (i = 1; i < elements.length -1; i++) {
+            total += Number(elements[i].value);
+        }
+        elements[elements.length - 1].value = total;
     }
 });
 
@@ -109,3 +140,9 @@ MultimarcasApp.
           return input.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
       }
   });
+
+$(".nav a").on("click", function () {
+    $(".nav").find(".active").removeClass("active");
+    $(this).parent().addClass("active");
+});
+

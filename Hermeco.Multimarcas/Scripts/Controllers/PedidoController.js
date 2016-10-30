@@ -1,4 +1,5 @@
 ﻿var PedidoController = ['$scope', '$http', '$routeParams', '$route', '$rootScope' ,function ($scope, $http, $routeParams, $route, $rootScope) {
+    $scope.loadSpin = true;
 
     $http.get(apiBaseUrl + '/pedido')
     .success(function (response) {
@@ -8,6 +9,7 @@
         } else {
             $scope.hasCartItems = true;
         }
+        $scope.loadSpin = false;
     })
      .error(function (error, status) {
         window.location.replace(apiBaseUrl);
@@ -29,9 +31,7 @@
         }
     }
 
-    $scope.formatNumber = function (number) {
-        return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-    }
+
 
     $scope.incrementar = function (fieldName) {
             cantidad = document.getElementById('cantidad' + fieldName);

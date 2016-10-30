@@ -1,4 +1,7 @@
-﻿<div class="row">
+﻿<div class="loading" ng-show="loadSpin">
+    <div class="loader"></div>
+</div>
+<div class="row">
     <div class="col-sm-12 col-lg-12">
         @*<!-- Page Content -->*@
         <div class="row" ng-switch="hasCartItems">
@@ -70,11 +73,16 @@
                         </div>
                     </div>
                 </div>
+                <div style="padding-left:3%;">
+                    <p>Recuerda que solo tienen un plazo máximo de 5 días para realizar el pago de tu pedido. Pasado este plazo, se libera la reserva de producto.</p>
+                </div>
                 <div style="float:right; margin-right:3%">
-                    <input type="checkbox" />
-                    <a herf="" target="_self" data-toggle="modal" data-target="#terminos">Acepto los Términos y Condiciones de Uso.</a>
+                    <div>
+                        <input type="checkbox" />
+                        <a herf="" target="_self" data-toggle="modal" data-target="#terminos">Acepto los Términos y Condiciones de Uso.</a>
 
-                    <button type="button" class="btn btn-primary" ng-click="procesarPedido();">Procesar Pedido</button>
+                        <button type="button" class="btn btn-primary" ng-click="procesarPedido();">Procesar Pedido</button>
+                    </div>
                 </div>
             </div>
             <div class="mensaje"  ng-switch-when="false">
@@ -166,6 +174,9 @@
                                         <tr>
                                             <td colspan="3"></td>
                                             <td colspan="2" ng-repeat="color in refdetail.Colores">
+                                                <div ng-repeat="Imagenes in refdetail.Imagenes | filter:{ DescripcionColor: color }:true |limitTo:1 ">
+                                                    <img class="img-responsive center" data-ng-src="data:image/JPEG;base64,{{Imagenes.Imagen }}" style=" display: block; max-height:50px; width: auto; height: auto;" />
+                                                </div>
                                                 <span class="block">{{color}}</span>
                                             </td>
                                             <td></td>
@@ -191,16 +202,13 @@
                                             <td ng-repeat-start="color in refdetail.Colores">
                                                 <span ng-repeat="plu in refdetail.Plu | filter:{Talla: talla, Color: color}:true">
                                                     <input id="Id" name="Id" type="hidden" value="{{plu.itemId}}" />
-                                                </span>
-                                                <input type="hidden" size="3" name="referencia" value="{{refdetail.IdReferencia}}" />
-                                                <input type="hidden" size="3" name="oferta" value="{{refdetail.IdOferta}}" />
-                                                <span ng-repeat="plu in refdetail.Plu | filter:{Talla: talla, Color: color}:true">
-                                                    <input type="hidden" size="3" name="plu" value="{{plu.Codigo}}" />
-                                                </span>
-                                                <input type="hidden" size="3" name="talla" value="{{talla}}" />
-                                                <input type="hidden" size="3" name="color" value="{{color}}" />
-                                                <span ng-repeat="plu in refdetail.Plu | filter:{Talla: talla, Color: color}:true">
-                                                    <input type="text" size="3" maxlength="3" name="{{color}}" value="{{plu.Cantidad}}" />
+                                                    <input type="hidden" size="3" name="referencia" value="{{refdetail.IdReferencia}}" />
+                                                    <input type="hidden" size="3" name="oferta" value="{{refdetail.IdOferta}}" />
+                                                    <input type="hidden" size="3" name="plu" value="{{plu.Codigo}}" /> 
+                                                    <input type="hidden" size="3" name="talla" value="{{talla}}" />
+                                                    <input type="hidden" size="3" name="color" value="{{color}}" />
+                                                    <input type="text" size="3" id="cantidad{{plu.Codigo}}" maxlength="3" name="{{color}}" value="{{plu.Cantidad}}" ng-keypress="validarNumero($event, plu.Codigo); " ng-keyup="sumarV(color); sumarH(this)" />
+                                                    <input id="stock{{plu.Codigo}}" name="stock" type="hidden" value="{{plu.stock}}" />
                                                 </span>
                                             </td>
                                             <td ng-repeat-end="">
@@ -221,7 +229,10 @@
                                                 <input type="text" size="3" maxlength="3" name="{{color}}" readonly  />
                                             </td>
                                             <td ng-repeat-end=""></td>
-                                            <td><input type="text" size="3" maxlength="3" name="totalGeneral" readonly /></td>
+                                            <td>
+                                                <input type="text" size="3" maxlength="3" name="totalGeneral" readonly />
+                                                
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>

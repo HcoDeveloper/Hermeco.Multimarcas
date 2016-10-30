@@ -43,9 +43,9 @@
                                 </div>
                                 <div><span>Ver +</span></div>
                                 <div class="info-producto">
-                                    <p>{{referencia.Plu[0].Descripcion | capitalize}}</p>
-                                    <p>{{referencia.Plu[0].Precio | currency}}</p>
-                                    <p>{{referencia.Plu[0].Precio | currency}}</p>
+                                    <p>{{referencia.Plu[0].Descripcion.substr(0,30) | capitalize}}</p>
+                                    <p ng-class="{'precio-hide' : referencia.PrecioOferta == referencia.Plu[0].Precio}" class="precio-referencia">$ {{formatNumber(referencia.PrecioOferta)}}</p>
+                                    <p ng-class="{'precio-diff' : referencia.PrecioOferta != referencia.Plu[0].Precio}" class="precio-normal">$ {{formatNumber(referencia.Plu[0].Precio)}}</p>
                                 </div>
                             </a>
                         </div>
@@ -118,11 +118,11 @@
                                                 <div>
                                                     <label>Tallas:</label><span ng-repeat="talla in refdetail.Tallas">{{talla}}&nbsp;</span>
                                                 </div>
-                                                <div>
-                                                    <label>Precio:</label><span class="precio-referencia">{{refdetail.Plu[0].Precio | currency}}</span>
+                                                <div ng-class="{'precio-hide' : refdetail.PrecioOferta == refdetail.Plu[0].Precio}">
+                                                    <label>Precio Oferta:</label><span class="precio-referencia">$ {{formatNumber(refdetail.PrecioOferta)}}</span>
                                                 </div>
-                                                <div>
-                                                    <label>Precio Oferta:</label>{{refdetail.Plu[0].Precio | currency}}
+                                                <div ng-class="{'precio-diff' : refdetail.PrecioOferta != refdetail.Plu[0].Precio}">
+                                                    <label>Precio:</label><span>$ {{formatNumber(refdetail.Plu[0].Precio)}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -138,6 +138,9 @@
                                                 <tr>
                                                     <td colspan="3"></td>
                                                     <td colspan="2" ng-repeat="color in refdetail.Colores">
+                                                        <div ng-repeat="Imagenes in refdetail.Imagenes | filter:{ DescripcionColor: color }:true |limitTo:1 ">
+                                                            <img class="img-responsive center" data-ng-src="data:image/JPEG;base64,{{Imagenes.Imagen }}" style=" display: block; max-height:50px; width: auto; height: auto;" />
+                                                        </div>
                                                         <span class="block">{{color}}</span>
                                                     </td>
                                                     <td></td>
@@ -161,15 +164,19 @@
                                                         <a href="#" class="btn btn-default" onclick="AsignAllColors(this)"><span class="glyphicon glyphicon-arrow-right"></a>
                                                     </td>
                                                     <td ng-repeat-start="color in refdetail.Colores">
-                                                        <input type="hidden" size="3" maxlength="3" name="id" value="{{refdetail.itemId}}" />
-                                                        <input type="hidden" size="3" maxlength="3" name="referencia" value="{{refdetail.IdReferencia}}" />
-                                                        <input type="hidden" size="3" maxlength="3" name="oferta" value="{{refdetail.IdOferta}}" />
                                                         <span ng-repeat="plu in refdetail.Plu | filter:{Talla: talla, Color: color}:true">
+                                                            <input type="hidden" size="3" maxlength="3" name="id" value="{{refdetail.itemId}}" />
+                                                            <input type="hidden" size="3" maxlength="3" name="referencia" value="{{refdetail.IdReferencia}}" />
+                                                            <input type="hidden" size="3" maxlength="3" name="oferta" value="{{refdetail.IdOferta}}" />
+
                                                             <input type="hidden" size="3" maxlength="3" name="plu" value="{{plu.Codigo}}" />
+
+                                                            <input type="hidden" size="3" maxlength="3" name="talla" value="{{talla}}" />
+                                                            <input type="hidden" size="3" maxlength="3" name="color" value="{{color}}" />
+
+                                                            <input type="text" size="3" id="cantidad{{plu.Codigo}}" maxlength="3" name="{{color}}" ng-keypress="validarNumero($event, plu.Codigo); " ng-keyup="sumarV(color); sumarH(this)" />
+                                                            <input id="stock{{plu.Codigo}}" name="stock" type="hidden" value="{{plu.stock}}" />
                                                         </span>
-                                                        <input type="hidden" size="3" maxlength="3" name="talla" value="{{talla}}" />
-                                                        <input type="hidden" size="3" maxlength="3" name="color" value="{{color}}" />
-                                                        <input type="text" size="3" maxlength="3" name="{{color}}" />
                                                     </td>
                                                     <td ng-repeat-end="">
                                                         /
@@ -178,7 +185,7 @@
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <input type="text" size="3" maxlength="3" />
+                                                        <input type="text" size="3" maxlength="3" value="0" readonly />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -186,10 +193,10 @@
                                                     <td></td>
                                                     <td></td>
                                                     <td ng-repeat-start="color in refdetail.Colores">
-                                                        <input type="text" size="3" maxlength="3" name="{{color}}" />
+                                                        <input type="text" size="3" maxlength="3" name="{{color}}" value="0" readonly />
                                                     </td>
                                                     <td ng-repeat-end=""></td>
-                                                    <td><input type="text" size="3" maxlength="3" name="totalGeneral" /></td>
+                                                    <td><input type="text" size="3" maxlength="3" name="totalGeneral" value="0" readonly /></td>
                                                 </tr>
                                             </table>
                                         </div>

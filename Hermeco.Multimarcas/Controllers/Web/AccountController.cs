@@ -58,7 +58,7 @@ namespace Hermeco.Multimarcas.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 else if( loginStatus == UserLoginStatus.LOGIN_FAILURE) {
-                    ViewData["Message"] = "Usuario o contraseña no validos";
+                    ViewData["Message"] = "Usuario o contraseña no válidos";
                     ViewBag.Result = true;
                     return View();
                 }

@@ -21,6 +21,7 @@
         if ($scope.running) return;
         $scope.page = page;
         $scope.running = true;
+        $scope.loadSpin = true;
         //$scope.loading = true;
         $http.get(apiBaseUrl + '/catalogo/?oferta=' + $routeParams.oferta + "&page=" + page)
         .success(function (data, status, headers) {
@@ -34,7 +35,7 @@
         .finally(function () {
             // Flag loading as complete
             $('body').addClass('loaded');
-            //$scope.loading = false;
+            $scope.loadSpin = false;
             $scope.running = false;
         });
     }
